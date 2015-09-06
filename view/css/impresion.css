@@ -1,0 +1,67 @@
+body {
+    font-family:Tahoma, Geneva, sans-serif;
+    font-size:14px;
+    text-align:center;
+}
+#cabecera{
+    text-align:left;   
+    height:200px;
+    width: 700px;
+    float:left;
+}
+#datosTransporte {
+    height:320px;
+    width: 800px;
+    border-color: red;   
+}
+#origenDestino {
+    float: left;
+    text-align: left;
+}
+#datosItem {
+    height:300px;
+    width: 900px;
+    float: left;
+
+}
+#referencia {
+    float: left;
+    width: 20%;
+    height: 100%;
+    border : 1px solid #000000;
+}
+#descripcion {
+    float: left;
+    width: 42%;
+    height: 100%;
+    border : 1px solid #000000;
+}
+#unidadMedida {
+    float: left;
+    width: 19%;
+    height: 100%;
+    border : 1px solid #000000;
+}
+#cantidad {
+    float: left;
+    width: 12%;
+    height: 100%;
+    border : 1px solid #000000;
+}
+th{
+    border : 1px solid #000000;
+}
+#observacion {
+    float: left;
+    width: 670px;
+    border : 1px solid #000000;
+}
+#totales {
+    float: left;
+    width: 670px;
+    border : 1px solid #000000;
+}
+#sellos {
+    float: left;
+    width: 670px;
+}     
