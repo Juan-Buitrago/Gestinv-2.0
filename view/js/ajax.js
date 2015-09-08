@@ -19,7 +19,7 @@ $(document).ready(function (e) {
                     url: "index.php",
                     data: data,
                     beforeSend: function (xhr) {
-                        $('.content').html('<div><img src="view/img/cargando.gif"/></div>');
+                        $('.content').html('<div><img src="view/img/ajax-loader.gif"/></div>');
                     },
                     success: function (data) {
                         setTimeout(function () {
