@@ -1,4 +1,4 @@
-<div class="contenido">
+
     <h1>Eliminar Remisiones</h1><hr/>
     <p>*Escribe la orden de despacho que desea eliminar*</p>
     <form action ="?action=remisiones&petition=delete" method="POST">
@@ -14,8 +14,6 @@
             </tr>
         </table>
     </form>
-
-</div>
 
 
 

@@ -4,15 +4,18 @@
         <title>Gestinv 2.0</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="view/css/login.css">
-        <link rel="shortcut icon" href="view/img/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="../../css/login.css">
+        <script type="application/javascript" language="javascript" src="../../js/jquery.js"></script>
+        <script type="application/javascript" language="javascript" src="../../js/proceso.js"></script>
+        <script type="application/javascript" language="javascript" src="../../js/ajax.js"></script>
+        <link rel="shortcut icon" href="../../img/favicon.ico">
 
     </head>
     <body>
+        <div class="content">
         <div class="mensaje"><h1>INICIAR SESSION</h1></div>
-        <div class="contenido"> 
             <div id ="login">
-                <form action="?action=login&petition=validalogin" method="POST">
+                <form name="inicioSession" action="login" method="POST">
                 <table width="100%">
                     <tr>
                         <td><input type="text" name ="username" placeholder="Usuario" autocomplete="off" required></td>
@@ -23,9 +26,10 @@
                     <tr>
                         <td><button>INGRESAR</button></td>
                     </tr>
-                </table>
-                </form>
+                </table>      
+                </form>          
             </div>
-        </div>
+        <div class="contenido"></div>
+        </div>   
     </body>
 </html>

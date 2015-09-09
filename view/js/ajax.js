@@ -1,38 +1,57 @@
 $(document).ready(function (e) {
-    setInterval(11000);
-    $(".loadfrm").click(function () {
-        $(".contenido").remove();
-        var y = $(this).attr("href");
-        var respuesta = $(".content");
-        respuesta.load(y);
-        return false;
-
+ 
+    $("form").submit(function (e) {
+        e.preventDefault();
+        var controller = $("form").attr("action");
+        var action = $("form").attr("name");
+        var data = $("form").serialize();
+        ajax(controller, action, data);
+    });   
+    
+    $("a").click(function (e) {
+        e.preventDefault();
+        var controller = $(this).attr("href");
+        var action = $(this).attr("name");
+        ajaxMenus(controller,action);
     });
-    $("button").click(
-            function () {
-
-                var formulario = $("form");
-                var typeformulario = $("form").attr("id");
-                var data = $(formulario).serialize();
-                $.ajax({
-                    type: "POST",
-                    url: "index.php",
-                    data: data,
-                    beforeSend: function (xhr) {
-                        $('.content').html('<div><img src="view/img/ajax-loader.gif"/></div>');
-                    },
-                    success: function (data) {
-                        setTimeout(function () {
-                            $('.content').fadeIn(1000).html(data);
-                        }, 5000);
-                    },
-                    timemout: 40000,
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        
-                        alert("ocurrio un error");
-                    }
-                });
-            }
-    );
 });
+
+function ajax(controller, action, data) {
+    $.ajax({
+        type: "POST",
+        url: "/Gestinv-2.0/controller/" + controller + ".Controller.php",
+        data: data + "&petition=" + action,
+        beforeSend: function (xhr) {
+            $(".contenido").html("<img src='/Gestinv-2.0/view/img/loader.gif'>");
+        },
+        success: function (data) {
+            setTimeout(function () {
+                $(".contenido").html(data);
+            }, 400);
+        },
+        timemout: 2000,
+        error: function (jqXHR, textStatus, errorThrown) {
+            $(".contenido").html("Ocurrio un error");
+        }
+    });
+};
+function ajaxMenus(controller, action) {    
+    $.ajax({
+        type: "POST",
+        url: "/Gestinv-2.0/controller/" + controller + ".Controller.php",
+        data:"action="+controller+"&petition="+action,
+        beforeSend: function (xhr) {
+            $(".contenido").html("<img src='/Gestinv-2.0/view/img/loader.gif'><br><h3>Procesando...</h3>");
+        },
+        success: function (data) {
+            setTimeout(function () {
+                $(".contenido").html(data);
+            }, 400);
+        },
+        timemout: 2000,
+        error: function (jqXHR, textStatus, errorThrown) {
+            $(".contenido").html("Ocurrio un error");
+        }
+    });
+};
 	

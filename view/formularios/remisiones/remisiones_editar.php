@@ -1,4 +1,3 @@
-<div class="contenido">
     <h1>Editar Remisiones</h1><hr/>
     <p>*Escriba la orden de despacho que desea editar*</p>
     <form action ="?action=remisiones&petition=edit" method="POST">
@@ -14,6 +13,3 @@
         </table>
         <hr/>
     </form>
-
-
-</div>

@@ -1,4 +1,4 @@
-<div class="contenido">
+
     <h1>Consulta De Remisiones</h1><hr/>
     <p>*Consulte por alguno de los parametros que vera a continuacion*</p>
     <form action ="?action=remisiones&petition=consult" method="POST">
@@ -25,7 +25,6 @@
             </tr>
         </table>
     </form>
-</div>
 
 
 

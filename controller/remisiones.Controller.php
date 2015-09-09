@@ -1,6 +1,31 @@
 <?php
 
-require_once 'model/remisiones.php';
+require_once '../model/remisiones.php';
+
+$controlador = new RemisionesController();
+
+@$proceso = $_REQUEST['petition'];
+
+switch ($proceso){
+    
+    case("frmRegistrar"):
+        $controlador->frmRemision();      
+    break;
+ case("frmConsulta"):
+        $controlador->frmConsulta();      
+    break;
+ case("frmEditar"):
+        $controlador->frmEditar();      
+    break;
+ case("frmEliminar"):
+        $controlador->frmEliminar();      
+    break;
+
+case("saveRemision"):
+        $controlador->saveRemision($_REQUEST['placa'],$_REQUEST['id_sak'],$_REQUEST['observacion']);      
+    break;
+}
+
 
 class RemisionesController {
 
@@ -12,27 +37,25 @@ class RemisionesController {
     }
 
     public function frmRemision() {
-        require_once 'view/formularios/remisiones/remisiones_crear.php';
+        require_once '../view/formularios/remisiones/remisiones_crear.php';
     }
 
     public function frmConsulta() {
-        require_once 'view/formularios/remisiones/remisiones_consulta.php';
+        require_once '../view/formularios/remisiones/remisiones_consulta.php';
     }
 
     public function frmEditar() {
-        require_once 'view/formularios/remisiones/remisiones_editar.php';
+        require_once '../view/formularios/remisiones/remisiones_editar.php';
     }
 
     public function frmEliminar() {
-        require_once 'view/formularios/remisiones/remisiones_eliminar.php';
+        require_once '../view/formularios/remisiones/remisiones_eliminar.php';
     }
 
-    public function saveRemision() {
+    public function saveRemision($placa,$id_sak,$observacion) {
 
         $process = 0; // determina el formulario de resultado a mostrar en remisiones_resultados.php
-        // se incopora la vista.
-        require_once 'view/index.php';
-        $save = $this->model->SaveHeader($_REQUEST['placa'], $_REQUEST['id_sak'], $_REQUEST['observacion']);
+        $save = $this->model->SaveHeader($placa,$id_sak ,$observacion );
         require_once 'view/formularios/remisiones/remisiones_resultados.php';
     }
 

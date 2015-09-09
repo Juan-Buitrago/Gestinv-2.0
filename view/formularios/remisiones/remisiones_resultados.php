@@ -15,7 +15,7 @@
         <tr><td>Observacion:</td></tr>
         <tr><td>' . $save['header']['observacion'] . '</td></tr>
     </table><hr/>
-    <form action ="?action=remisiones&petition=saveArticulos&id=' . $save['header']['pk_id'] . '" method ="POST">
+    <form name="remisiones" action ="saveRemision" method ="POST">
         <table width="700">
             <tr> 
                 <th><strong>CODIGO</strong></th>

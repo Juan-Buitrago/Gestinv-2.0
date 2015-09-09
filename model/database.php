@@ -1,6 +1,6 @@
 <?php
 
-require_once 'model/global.php';
+require_once 'global.php';
 
 class conexion {
 

@@ -1,6 +1,22 @@
 <?php
+session_start();
 
-require_once 'model/login.php';
+require_once '../model/login.php';
+
+$controlador = new loginController();
+
+@$proceso = $_REQUEST['petition'];
+
+switch ($proceso){
+    
+    case("inicioSession"):
+        $controlador->validalogin($_REQUEST['username'],$_REQUEST['password']);
+    break;
+
+    case("unlog"):
+        $controlador->unlog();
+    break;
+}
 
 class loginController {
     
@@ -29,19 +45,16 @@ class loginController {
                         
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;
-            
-             echo "<script>alert('Bienvenido a GESTIV 2.0')</script>"; 
-             
-              echo '<meta http-equiv="refresh" content="0; url=?" />';
+              echo '<meta http-equiv="refresh" content="0; url=/Gestinv-2.0/index.php" />';
         }
         
     }
     
     public function unlog(){
-        
+          
         session_destroy();
-        
-        echo '<meta http-equiv="refresh" content="0; url=?" />';
+      
+        echo '<meta http-equiv="refresh" content="0; url=" />';
     }
 
 }
