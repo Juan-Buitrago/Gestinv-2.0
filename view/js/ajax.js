@@ -3,7 +3,7 @@ $(document).ready(function (e) {
     $("form").submit(function (e) {
         e.preventDefault();
         var controller = $("form").attr("action");
-        var action = $("form").attr("name");
+        var action = $(this).attr("name");
         var data = $("form").serialize();
         ajax(controller, action, data);
     });   
@@ -29,7 +29,7 @@ function ajax(controller, action, data) {
                 $(".contenido").html(data);
             }, 400);
         },
-        timemout: 2000,
+        timemout: 10000,
         error: function (jqXHR, textStatus, errorThrown) {
             $(".contenido").html("Ocurrio un error");
         }
@@ -41,6 +41,7 @@ function ajaxMenus(controller, action) {
         url: "/Gestinv-2.0/controller/" + controller + ".Controller.php",
         data:"action="+controller+"&petition="+action,
         beforeSend: function (xhr) {
+            $(".contenido").css('display','block');
             $(".contenido").html("<img src='/Gestinv-2.0/view/img/loader.gif'><br><h3>Procesando...</h3>");
         },
         success: function (data) {
@@ -48,7 +49,7 @@ function ajaxMenus(controller, action) {
                 $(".contenido").html(data);
             }, 400);
         },
-        timemout: 2000,
+        timemout: 10000,
         error: function (jqXHR, textStatus, errorThrown) {
             $(".contenido").html("Ocurrio un error");
         }

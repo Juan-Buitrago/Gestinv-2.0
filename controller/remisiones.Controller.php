@@ -2,98 +2,69 @@
 
 require_once '../model/remisiones.php';
 
-$controlador = new RemisionesController();
+$controlador = new Remisiones();
 
 @$proceso = $_REQUEST['petition'];
 
-switch ($proceso){
-    
+switch ($proceso) {
+
     case("frmRegistrar"):
-        $controlador->frmRemision();      
-    break;
- case("frmConsulta"):
-        $controlador->frmConsulta();      
-    break;
- case("frmEditar"):
-        $controlador->frmEditar();      
-    break;
- case("frmEliminar"):
-        $controlador->frmEliminar();      
-    break;
-
-case("saveRemision"):
-        $controlador->saveRemision($_REQUEST['placa'],$_REQUEST['id_sak'],$_REQUEST['observacion']);      
-    break;
-}
-
-
-class RemisionesController {
-
-    private $model;
-
-    public function __CONSTRUCT() {
-
-        $this->model = new Remisiones();
-    }
-
-    public function frmRemision() {
         require_once '../view/formularios/remisiones/remisiones_crear.php';
-    }
-
-    public function frmConsulta() {
+        break;
+    case("frmConsulta"):
         require_once '../view/formularios/remisiones/remisiones_consulta.php';
-    }
-
-    public function frmEditar() {
+        break;
+    case("frmEditar"):
         require_once '../view/formularios/remisiones/remisiones_editar.php';
-    }
-
-    public function frmEliminar() {
+        break;
+    case("frmEliminar"):
         require_once '../view/formularios/remisiones/remisiones_eliminar.php';
-    }
+        break;
 
-    public function saveRemision($placa,$id_sak,$observacion) {
+    case("saveRemision"):
 
         $process = 0; // determina el formulario de resultado a mostrar en remisiones_resultados.php
-        $save = $this->model->SaveHeader($placa,$id_sak ,$observacion );
-        require_once 'view/formularios/remisiones/remisiones_resultados.php';
-    }
+        $save = $controlador->SaveHeader($_REQUEST['placa'], $_REQUEST['id_sak'], $_REQUEST['observacion']);
+        require_once '../view/formularios/remisiones/remisiones_resultados.php';
 
-    public function saveArticulos() {
+        break;
+    case("saveArticulos"):
 
         $process = 1; // determina el formulario de resultado a mostrar en remisiones_resultados.php
-        // se incopora la vista.
-        require_once 'view/index.php';
-        $save = $this->model->SaveArticle($_REQUEST['id'], $_REQUEST['codigo'], $_REQUEST['descripcion'], $_REQUEST['cantidad']);
-        require_once 'view/formularios/remisiones/remisiones_resultados.php';
-    }
-
-    public function impresion() {
-
-        $printHeader = $this->model->loadHeader($_REQUEST['id']);
-        $printArticle = $this->model->loadArticles($_REQUEST['id']);
-        require_once 'view/formularios/remisiones/remisiones_impresion.php';
-    }
-
-    public function consult() {
-
-        if (empty($_REQUEST['id'])) {
-
+        $save = $controlador->SaveArticle($_REQUEST['id'], $_REQUEST['codigo'], $_REQUEST['descripcion'], $_REQUEST['cantidad']);
+        require_once '../view/formularios/remisiones/remisiones_resultados.php';
+        break;
+    
+    case("impresion"):
+        
+        $printHeader = $controlador->loadHeader($_REQUEST['id']);
+        $printArticle = $controlador->loadArticles($_REQUEST['id']);
+        require_once '../view/formularios/remisiones/remisiones_impresion.php';
+        
+        break;
+    
+    case("consulta"):
+        
+         if (empty($_REQUEST['id'])) {
+  
             $process = 3; // determina el formulario de resultado a mostrar en remisiones_resultados.php
-            // se incopora la vista.
-            require_once 'view/index.php';
-            $consult = $this->model->consult($_REQUEST['fecha_inicial'], $_REQUEST['fecha_final']);
-            require_once 'view/formularios/remisiones/remisiones_resultados.php';
+            $consult = $controlador->consult($_REQUEST['fecha_inicial'], $_REQUEST['fecha_final']);
+            require_once '../view/formularios/remisiones/remisiones_resultados.php';
         } else {
-
             $process = 2; // determina el formulario de resultado a mostrar en remisiones_resultados.php
-            // se incopora la vista.
-            require_once 'view/index.php';
-            $header = $this->model->loadHeader($_REQUEST['id']);
-            $article = $this->model->loadArticles($_REQUEST['id']);
-            require_once 'view/formularios/remisiones/remisiones_resultados.php';
+            $header = $controlador->loadHeader($_REQUEST['id']);
+            $article = $controlador->loadArticles($_REQUEST['id']);
+            require_once '../view/formularios/remisiones/remisiones_resultados.php';
         }
-    }
+        
+        break;
+    
+    case("finalizar"):
+        echo "finalizar";
+        break;
+}
+
+class RemisionesController {
 
     public function edit() {
 

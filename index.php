@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!$_SESSION['username']){
+if (!@$_SESSION['username']){
     echo '<meta http-equiv="refresh" content="0; url=view/formularios/login/frmLogin.php" />';
 }else{
 echo'      

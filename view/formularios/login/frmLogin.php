@@ -6,10 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../css/login.css">
         <script type="application/javascript" language="javascript" src="../../js/jquery.js"></script>
-        <script type="application/javascript" language="javascript" src="../../js/proceso.js"></script>
         <script type="application/javascript" language="javascript" src="../../js/ajax.js"></script>
         <link rel="shortcut icon" href="../../img/favicon.ico">
-
     </head>
     <body>
         <div class="content">

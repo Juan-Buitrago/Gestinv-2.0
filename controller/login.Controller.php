@@ -42,10 +42,9 @@ class loginController {
             
         }
         elseif ($validar == 1){
-                        
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;
-              echo '<meta http-equiv="refresh" content="0; url=/Gestinv-2.0/index.php" />';
+              echo '<meta http-equiv="refresh" content="0; url=/Gestinv-2.0/" />';
         }
         
     }
@@ -54,7 +53,7 @@ class loginController {
           
         session_destroy();
       
-        echo '<meta http-equiv="refresh" content="0; url=" />';
+        echo '<meta http-equiv="refresh" content="0; url=/Gestinv-2.0/" />';
     }
 
 }
