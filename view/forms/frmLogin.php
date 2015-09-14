@@ -13,7 +13,7 @@
         <div class="content">
         <div class="mensaje"><h1>INICIAR SESSION</h1></div>
             <div id ="login">
-                <form name="inicioSession" action="controller/login.Controller.php" method="POST">
+                <form name="inicioSession" action="login.Controller.php" method="POST">
                 <table width="100%">
                     <tr>
                         <td><input type="text" name ="username" placeholder="Usuario" autocomplete="off" required></td>

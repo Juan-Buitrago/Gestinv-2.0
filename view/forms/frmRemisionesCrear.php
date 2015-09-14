@@ -1,7 +1,7 @@
-<script type="application/javascript" language="javascript" src="view/js/jquery.js"></script>
-<script type="application/javascript" language="javascript" src="view/js/ajax.js"></script>
+<script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/jquery.js"></script>
+<script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/ajax.js"></script>
 <h1>Registrar Remision</h1><hr/>
-<form name="saveRemision" action ="controller/remisiones.controller.php" method="POST" autocomplete="off">
+<form name="saveRemision" action ="remisiones.controller.php" method="POST" autocomplete="off">
     <table style="text-align:left" >
         <tr>
             <td>Orden de Despacho:</td><td></td>

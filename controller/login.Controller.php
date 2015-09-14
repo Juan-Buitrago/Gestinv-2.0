@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require_once '../model/login.php';
 
 $controlador = new loginController();
@@ -37,23 +36,25 @@ class loginController {
         
         if ($validar == 0){
             
-           echo "<script>alert('El usuario y contrasena son incorrectas')</script>"; 
-           echo '<meta http-equiv="refresh" content="0; url=?action=login&petition=frmlogin" />';
+           echo "<script>alert('El usuario y contrasena son incorrectas')</script>";
+           
+           echo '<meta http-equiv="refresh" content="0; url=index.php"/>';
             
         }
         elseif ($validar == 1){
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;
-              echo '<meta http-equiv="refresh" content="0; url=" />';
+            
+          echo '<meta http-equiv="refresh" content="0; url=index.php"/>';
         }
         
     }
     
     public function unlog(){
           
-        session_destroy();
-      
-        echo '<meta http-equiv="refresh" content="0; url="/>';
+        session_destroy();    
+       echo '<meta http-equiv="refresh" content="0; url=index.php"/>';
+        
     }
 
 }

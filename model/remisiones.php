@@ -1,9 +1,9 @@
 <?php
-
+session_start();
 require_once 'database.php';
 
 class Remisiones extends conexion {
-
+    
     private $Conexion;
 
     public function __CONSTRUCT() {
@@ -42,9 +42,9 @@ class Remisiones extends conexion {
     }
 
     public function SaveHeader($placa, $id_sak, $observacion) {
-
+        $usuario = $_SESSION['username'];
         //se reciben la informacion por medio del metodo y se crea el query
-        $insert = "INSERT INTO remisiones VALUES ('','$placa','$id_sak','" . date("Y-m-d") . "','$observacion','USUARIO')";
+        $insert = "INSERT INTO remisiones VALUES ('','$placa','$id_sak','" . date("Y-m-d") . "','$observacion','$usuario')";
         $this->Conexion->eject($insert); // Se inyectan los datos a la base de datos
         // se almacena en un array los datos almacenados y se retornan
         $consult = "SELECT MAX(pk_id) AS id FROM remisiones";

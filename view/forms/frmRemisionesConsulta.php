@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <script type="application/javascript" language="javascript" src="view/js/jquery.js"></script>
-        <script type="application/javascript" language="javascript" src="view/js/ajax.js"></script>
-    </head>
-    <body>
+<script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/jquery.js"></script>
+<script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/ajax.js"></script>
 <h1>Consulta De Remisiones</h1><hr/>
 <p>*Consulte por alguno de los parametros que vera a continuacion*</p>
-<form name="consulta" action ="controller/remisiones.controller.php" method="POST">
+<form name="consulta" action ="remisiones.controller.php" method="POST">
     <table style="text-align: left">
         <tr>
             <td><p>Buscar Por ID: </p></td>
@@ -31,8 +26,6 @@
         </tr>
     </table>
 </form>
-    </body>
-</html>
 
 
 

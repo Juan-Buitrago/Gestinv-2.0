@@ -11,10 +11,10 @@ $(document).ready(function (e) {
 function ajax(controller, action, data) {
     $.ajax({
         type: "POST",
-        url: controller,
+        url: "/Gestinv-2.0/controller/"+controller,
         data: data + "&petition=" + action,
         beforeSend: function (xhr) {
-            $(".contenido").html("<img src='view/img/loader.gif'>");
+            $(".contenido").html("<img src='view/img/loader.gif'><br><h3>Procesando...</h3>");
         },
         success: function (data) {
             setTimeout(function () {
