@@ -1,28 +1,27 @@
 $(document).ready(function (e) {
- 
     $("form").submit(function (e) {
         e.preventDefault();
         var controller = $("form").attr("action");
         var action = $(this).attr("name");
-        var data = $("form").serialize();
+        var data = $(this).serialize();
         ajax(controller, action, data);
-    });   
-    
+    });
+
     $("a").click(function (e) {
         e.preventDefault();
         var controller = $(this).attr("href");
         var action = $(this).attr("name");
-        ajaxMenus(controller,action);
+        ajaxMenus(controller, action);
     });
 });
 
 function ajax(controller, action, data) {
     $.ajax({
         type: "POST",
-        url: "/Gestinv-2.0/controller/" + controller + ".Controller.php",
+        url: controller,
         data: data + "&petition=" + action,
         beforeSend: function (xhr) {
-            $(".contenido").html("<img src='/Gestinv-2.0/view/img/loader.gif'>");
+            $(".contenido").html("<img src='view/img/loader.gif'><br><h3>Procesando...</h3>");
         },
         success: function (data) {
             setTimeout(function () {
@@ -35,14 +34,15 @@ function ajax(controller, action, data) {
         }
     });
 };
-function ajaxMenus(controller, action) {    
+
+function ajaxMenus(controller, action) {
     $.ajax({
         type: "POST",
-        url: "/Gestinv-2.0/controller/" + controller + ".Controller.php",
-        data:"action="+controller+"&petition="+action,
+        url: controller,
+        data: "&petition=" + action,
         beforeSend: function (xhr) {
-            $(".contenido").css('display','block');
-            $(".contenido").html("<img src='/Gestinv-2.0/view/img/loader.gif'><br><h3>Procesando...</h3>");
+            $(".contenido").css('display', 'block');
+            $(".contenido").html("<img src='view/img/loader.gif'><br><h3>Procesando...</h3>");
         },
         success: function (data) {
             setTimeout(function () {
@@ -54,5 +54,6 @@ function ajaxMenus(controller, action) {
             $(".contenido").html("Ocurrio un error");
         }
     });
-};
+}
+;
 	

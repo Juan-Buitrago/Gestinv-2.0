@@ -1,7 +1,12 @@
 <?php
 session_start();
 if (!@$_SESSION['username']){
-    echo '<meta http-equiv="refresh" content="0; url=view/formularios/login/frmLogin.php" />';
+    echo'<script type="application/javascript" language="javascript" src="view/js/jquery.js"></script>';
+    echo '<script>
+        $(document).ready(function (e) {
+            $("#cuerpo").load("view/formularios/login/frmlogin.php");
+           });</script>';
+    echo'<div id="cuerpo"></div>';
 }else{
 echo'      
     <!DOCTYPE html>
@@ -28,7 +33,7 @@ echo'
                 <div class="float-right">
                     <ul>
                         <li>Hola! Juan Buitrago</li>
-                        <li><a name="unlog" href="login">Cerrar Session</a></li>
+                        <li><a name="unlog" href="controller/login.Controller.php">Cerrar Session</a></li>
                         <li><a href="">Ayuda</a></li>
                     </ul>
                 </div>
@@ -41,10 +46,10 @@ echo'
                         <li><a href=""><span>Principal</span></a></li>
                         <li><a href=""><span>Remisiones</span></a>
                             <ul>
-                                <li><a name="frmRegistrar" href="remisiones"><span>Registrar</span></a></li>
-                                <li><a name="frmConsulta" href="remisiones"><span>Consultar</span></a></li>
-                                <li><a name="frmEditar" href="remisiones"><span>Editar</span></a></li>
-                                <li><a name="frmEliminar" href="remisiones"><span>Eliminar</span></a></li>  
+                                <li><a name="frmRegistrar" href="controller/remisiones.Controller.php"><span>Registrar</span></a></li>
+                                <li><a name="frmConsulta" href="controller/remisiones.Controller.php"><span>Consultar</span></a></li>
+                                <li><a name="frmEditar" href="controller/remisiones.Controller.php"><span>Editar</span></a></li>
+                                <li><a name="frmEliminar" href="controller/remisiones.Controller.php"><span>Eliminar</span></a></li>  
                             </ul>
                         </li>
                         <li><a href="#"><span>Tiempos</span></a>

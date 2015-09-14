@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Gestinv 2.0</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../../css/login.css">
-        <script type="application/javascript" language="javascript" src="view/js/jquery.js"></script>
-        <script type="application/javascript" language="javascript" src="view/js/ajax.js"></script>
-        <link rel="shortcut icon" href="../../img/favicon.ico">
-    </head>
-    <body>
+<script type="application/javascript" language="javascript" src="view/js/jquery.js"></script>
+<script type="application/javascript" language="javascript" src="view/js/ajax.js"></script>
 <h1>Registrar Remision</h1><hr/>
-<form name="saveRemision" action ="remisiones" method="POST" autocomplete="off">
+<form name="saveRemision" action ="controller/remisiones.controller.php" method="POST" autocomplete="off">
     <table style="text-align:left" >
         <tr>
             <td>Orden de Despacho:</td><td></td>
@@ -48,5 +38,5 @@
         </tr>
     </table>
 </form>
-    </body>
+</body>
 </html>

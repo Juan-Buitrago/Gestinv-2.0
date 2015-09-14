@@ -4,16 +4,16 @@
         <title>Gestinv 2.0</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../../css/login.css">
-        <script type="application/javascript" language="javascript" src="../../js/jquery.js"></script>
-        <script type="application/javascript" language="javascript" src="../../js/ajax.js"></script>
-        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="view/css/login.css">
+        <script type="application/javascript" language="javascript" src="view/js/jquery.js"></script>
+        <script type="application/javascript" language="javascript" src="view/js/ajaxlogin.js"></script>
+        <link rel="shortcut icon" href="view/img/favicon.ico">
     </head>
     <body>
         <div class="content">
         <div class="mensaje"><h1>INICIAR SESSION</h1></div>
             <div id ="login">
-                <form name="inicioSession" action="login" method="POST">
+                <form name="inicioSession" action="controller/login.Controller.php" method="POST">
                 <table width="100%">
                     <tr>
                         <td><input type="text" name ="username" placeholder="Usuario" autocomplete="off" required></td>
