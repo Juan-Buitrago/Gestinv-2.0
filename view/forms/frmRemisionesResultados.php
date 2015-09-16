@@ -16,7 +16,7 @@ if ($process == 0) {
         <tr><td>Observacion:</td></tr>
         <tr><td>' . $save['header']['observacion'] . '</td></tr>
     </table><hr/>
-    <form name="saveArticulos" action ="remisiones.Controller.php" method ="POST" class="ajax">
+    <form name="saveArticulos" action ="remisiones.Controller.php" method ="POST">
         <table width="700">
             <tr> 
                 <th><strong>CODIGO</strong></th>
