@@ -22,7 +22,6 @@ switch ($proceso) {
         break;
 
     case("saveRemision"):
-
         $process = 0; // determina el formulario de resultado a mostrar en remisiones_resultados.php
         $save = $controlador->SaveHeader($_REQUEST['placa'], $_REQUEST['id_sak'], $_REQUEST['observacion']);
         require_once '../view/forms/frmRemisionesResultados.php';

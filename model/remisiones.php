@@ -1,9 +1,9 @@
 <?php
-session_start();
+
 require_once 'database.php';
 
 class Remisiones extends conexion {
-    
+
     private $Conexion;
 
     public function __CONSTRUCT() {
@@ -42,17 +42,23 @@ class Remisiones extends conexion {
     }
 
     public function SaveHeader($placa, $id_sak, $observacion) {
-        $usuario = $_SESSION['username'];
-        //se reciben la informacion por medio del metodo y se crea el query
-        $insert = "INSERT INTO remisiones VALUES ('','$placa','$id_sak','" . date("Y-m-d") . "','$observacion','$usuario')";
-        $this->Conexion->eject($insert); // Se inyectan los datos a la base de datos
-        // se almacena en un array los datos almacenados y se retornan
-        $consult = "SELECT MAX(pk_id) AS id FROM remisiones";
-        $consecutive = $this->Conexion->eject($consult);
-        while ($row = $this->Conexion->fetch_assoc($consecutive)) {
-            $id = $row['id'];
+
+        try {
+            $usuario = $_SESSION['username'];
+            //se reciben la informacion por medio del metodo y se crea el query
+            $insert = "INSERT INTO remisiones VALUES ('','$placa','$id_sak','" . date("Y-m-d") . "','$observacion','$usuario')";
+            $this->Conexion->eject($insert); // Se inyectan los datos a la base de datos
+            // se almacena en un array los datos almacenados y se retornan
+            $consult = "SELECT MAX(pk_id) AS id FROM remisiones";
+            $consecutive = $this->Conexion->eject($consult);
+            while ($row = $this->Conexion->fetch_assoc($consecutive)) {
+                $id = $row['id'];
+            }
+
+            return $this->loadHeader($id);
+        } catch (Exception $e) {
+            return $e;
         }
-        return $this->loadHeader($id);
     }
 
     public function SaveArticle($id, $codigo, $descripcion, $cantidad) {
@@ -104,18 +110,18 @@ class Remisiones extends conexion {
             return 1;
         }
     }
-    public function delete($id){
-        
-        $deleteHeader ="DELETE FROM remisiones WHERE pk_id = $id";
-        $deleteArticles = "DELETE FROM mov_remisiones WHERE fk_rem_id = $id";      
+
+    public function delete($id) {
+
+        $deleteHeader = "DELETE FROM remisiones WHERE pk_id = $id";
+        $deleteArticles = "DELETE FROM mov_remisiones WHERE fk_rem_id = $id";
         $result = $this->Conexion->eject($deleteHeader);
-        $result = $this->Conexion->eject($deleteArticles);       
+        $result = $this->Conexion->eject($deleteArticles);
         if (!$result) {
             return 0;
         } else {
             return 1;
         }
-        
     }
 
 }
