@@ -141,7 +141,7 @@ if ($process == 0) {
 
     foreach ($consult as $row):
         echo "<tr>";
-        echo "<td><form name='impresion' action ='remisiones.controller.php' method ='POST'><input name ='img' type='image'  src='view/img/ok.png'/ style='border:0;background:none;'><input type = 'hidden' name ='id' value=' ". @$row ['pk_id'] ."'></form></td>";
+        echo "<td><form name='consulta' action ='remisiones.controller.php' method ='POST'><input name ='img' type='image'  src='view/img/ok.png'/ style='border:0;background:none;'><input type = 'hidden' name ='id' value=' ". @$row ['pk_id'] ."'></form></td>";
         echo "<td>" . @$row['pk_id'] . "</td>";
         echo "<td>" . @$row['placa'] . "</td>";
         echo "<td>" . @$row['fecha'] . "</td>";

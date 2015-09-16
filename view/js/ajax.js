@@ -17,6 +17,8 @@ $(document).ready(function (e) {
         ajaxMenus(controller, action);
     });
 
+
+
 });
 
 function ajax(controller, action, data) {
@@ -60,5 +62,4 @@ function ajaxMenus(controller, action) {
             $(".contenido").html("Ocurrio un error");
         }
     });
-}
-;
+};
