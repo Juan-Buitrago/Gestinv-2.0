@@ -19,7 +19,7 @@
                 </div>
                 <div class="float-right">
                     <ul>
-                        <li>Hola! Juan Buitrago</li>
+                        <li>Hola! <?php echo $_SESSION['username']  ?></li>
                         <li><a name="unlog" href="login.Controller.php">Cerrar Session</a></li>
                         <li><a href="">Ayuda</a></li>
                     </ul>

@@ -38,22 +38,22 @@ class loginController {
             
            echo "<script>alert('El usuario y contrasena son incorrectas')</script>";
            
-           echo '<meta http-equiv="refresh" content="0; url=index.php"/>';
+           echo '<meta http-equiv="refresh" content="0; url="/>';
             
         }
         elseif ($validar == 1){
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;
             
-          echo '<meta http-equiv="refresh" content="0; url=index.php"/>';
+          echo '<meta http-equiv="refresh" content="0; url="/>';
         }
         
     }
     
     public function unlog(){
           
-        session_destroy();    
-       echo '<meta http-equiv="refresh" content="0; url=index.php"/>';
+       session_destroy();    
+       echo '<meta http-equiv="refresh" content="0; url="/>';
         
     }
 
