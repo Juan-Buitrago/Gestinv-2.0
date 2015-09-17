@@ -57,10 +57,7 @@
                         </li>
                         <li><a href="#"><span>Vehiculos</span></a>
                             <ul>
-                                <li><a href="#"><span>Registrar</span></a></li>
-                                <li><a href="#"><span>Editar</span></a></li>
-                                <li><a href="#"><span>Consultar</span></a></li>
-                                <li><a href="#"><span>Eliminar</span></a></li>  
+                                <li><a name="frmCrear" href="vehiculos.Controller.php"><span>Registrar</span></a></li>
                             </ul>
                         </li>
                     </ul>

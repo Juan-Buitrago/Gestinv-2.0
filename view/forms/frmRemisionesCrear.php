@@ -16,7 +16,15 @@
         </tr>
         <tr>
             <td>Placa:</td>
-            <td><input type ="text" name="placa"  required></td>
+            <td><select name="placa">
+                    <?php
+                    foreach ($placas as $row):
+                        echo "<option value='" . $row['pk_pla_id'] . "'>";
+                        echo $row['pk_pla_id'];
+                        echo "</option>";
+                    endforeach;
+                    ?>
+                </select></td>
         </tr>  
         <tr>
             <td>Id Sak:</td>

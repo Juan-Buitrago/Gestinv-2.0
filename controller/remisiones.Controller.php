@@ -8,8 +8,10 @@ $controlador = new Remisiones();
 
 switch ($proceso) {
 
-    case("frmCrear"):
+    case("frmCrear"):      
+        $placas = $controlador->loadPlacas();
         include '../view/forms/frmRemisionesCrear.php';
+        
         break;
     case("frmEditar"):
         include '../view/forms/frmRemisionesEditar.php';
@@ -94,6 +96,6 @@ switch ($proceso) {
         break;
 
     case("finalizar"):
-        echo '<meta http-equiv="refresh" content="0; url=index.php"/>';
+        echo '<meta http-equiv="refresh" content="0; url=/"/>';
         break;
 }

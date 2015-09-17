@@ -18,7 +18,7 @@ body{
     -moz-background-size: cover;
     -o-background-size: cover;
 }
-input,textArea {
+input,textArea,select {
     border-radius: 5px 5px 5px;
     background:rgba(0,0,0,0.2);
     color: grey;

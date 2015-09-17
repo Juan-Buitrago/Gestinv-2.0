@@ -14,6 +14,7 @@ $(document).ready(function (e) {
         e.preventDefault();
         var controller = $(this).attr("href");
         var action = $(this).attr("name");
+        $(".contenido").empty();
         ajaxMenus(controller, action);
     });
 

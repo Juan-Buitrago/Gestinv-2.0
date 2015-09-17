@@ -10,6 +10,17 @@ class Remisiones extends conexion {
         $this->Conexion = new conexion();
         $this->Conexion->connect();
     }
+    
+    public function loadPlacas(){
+        $placas = "SELECT pk_pla_id FROM placas";
+        $consult= $this->Conexion->eject($placas);
+        while ($row = $this->Conexion->fetch_assoc($consult)){
+            
+           $result[] = $row; 
+        }
+        return @$result;      
+        
+    }
 
     public function loadHeader($id) {
 
