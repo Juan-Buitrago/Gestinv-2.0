@@ -13,7 +13,7 @@ class Remisiones extends conexion {
 
     public function loadHeader($id) {
 
-        $header = "SELECT * FROM remisiones WHERE pk_id = $id";
+        $header = "SELECT * FROM remisiones WHERE pk_rem_id = $id";
         $consult = $this->Conexion->eject($header);
         while ($row = $this->Conexion->fetch_assoc($consult)) {
             $result['header'] = $row;
@@ -23,7 +23,7 @@ class Remisiones extends conexion {
 
     public function loadArticles($id) {
 
-        $header = "SELECT * FROM mov_remisiones WHERE fk_rem_id = $id";
+        $header = "SELECT * FROM remisiones_articulos WHERE fk_rem_id = $id";
         $consult = $this->Conexion->eject($header);
         while ($row = $this->Conexion->fetch_assoc($consult)) {
             $result[] = $row;
@@ -33,7 +33,7 @@ class Remisiones extends conexion {
 
     public function loadArticle($id) {
 
-        $header = "SELECT * FROM mov_remisiones WHERE pk_id = $id";
+        $header = "SELECT * FROM remisiones_articulos WHERE pk_rem_art_id = $id";
         $consult = $this->Conexion->eject($header);
         while ($row = $this->Conexion->fetch_assoc($consult)) {
             $result[] = $row;
@@ -42,45 +42,39 @@ class Remisiones extends conexion {
     }
 
     public function SaveHeader($placa, $id_sak, $observacion) {
-
-        try {
+        
             $usuario = $_SESSION['username'];
             //se reciben la informacion por medio del metodo y se crea el query
-            $insert = "INSERT INTO remisiones VALUES ('','$placa','$id_sak','" . date("Y-m-d") . "','$observacion','$usuario')";
+            $insert = "INSERT INTO remisiones VALUES ('','$placa','" . date("Y-m-d") . "','$id_sak','$observacion','1')";
             $this->Conexion->eject($insert); // Se inyectan los datos a la base de datos
             // se almacena en un array los datos almacenados y se retornan
-            $consult = "SELECT MAX(pk_id) AS id FROM remisiones";
+            $consult = "SELECT MAX(pk_rem_id) AS id FROM remisiones";
             $consecutive = $this->Conexion->eject($consult);
             while ($row = $this->Conexion->fetch_assoc($consecutive)) {
                 $id = $row['id'];
             }
-
             return $this->loadHeader($id);
-        } catch (Exception $e) {
-            return $e;
-        }
     }
 
     public function SaveArticle($id, $codigo, $descripcion, $cantidad) {
 
         //se recibe la informacion por medio del metodo y se crea el query
-        $insert = "INSERT INTO mov_remisiones VALUES ('','$id','$codigo','$descripcion','$cantidad')";
+        $insert = "INSERT INTO remisiones_articulos VALUES ('','$id','$codigo','$descripcion','$cantidad')";
         $this->Conexion->eject($insert); // Se inyectan los datos a la base de datos
         // se almacena en un array los datos almacenados y se retornan
-        $consult = "SELECT * FROM mov_remisiones WHERE fk_rem_id=$id";
+        $consult = "SELECT * FROM remisiones_articulos WHERE fk_rem_id = $id";
         $query = $this->Conexion->eject($consult);
         while ($row = $this->Conexion->fetch_assoc($query)) {
 
             $array[] = $row;
-        }
+        }      
         $array ['header'] = $this->loadHeader($id);
-
         return $array;
     }
 
     public function consult($fecha_inicio, $fecha_final) {
 
-        $consult = "SELECT * FROM remisiones WHERE fecha BETWEEN '$fecha_inicio' and '$fecha_final';";
+        $consult = "SELECT * FROM remisiones WHERE rem_fecha BETWEEN '$fecha_inicio' and '$fecha_final';";
         $resultados = $this->Conexion->eject($consult);
         while ($row = $this->fetch_assoc($resultados)) {
 
@@ -91,7 +85,7 @@ class Remisiones extends conexion {
 
     public function updateHeader($id, $placa, $id_sak, $observacion) {
 
-        $update = "UPDATE remisiones SET placa='$placa',id_sak='$id_sak',observacion='$observacion'WHERE pk_id=$id";
+        $update = "UPDATE remisiones SET fk_pla_id ='$placa',rem_id_sak='$id_sak',rem_observacion='$observacion'WHERE pk_rem_id=$id";
         $result = $this->Conexion->eject($update);
         if (!$result) {
             return 0;
@@ -102,7 +96,7 @@ class Remisiones extends conexion {
 
     public function updateArticle($id, $codigo, $descripcion, $cantidad) {
 
-        $update = "UPDATE mov_remisiones SET codigo='$codigo',descripcion='$descripcion',cantidad='$cantidad' WHERE pk_id=$id";
+        $update = "UPDATE remisiones_articulos SET rem_art_codigo='$codigo',rem_art_descripcion='$descripcion',rem_art_cantidad='$cantidad' WHERE pk_rem_art_id=$id";
         $result = $this->Conexion->eject($update);
         if (!$result) {
             return 0;
@@ -113,10 +107,10 @@ class Remisiones extends conexion {
 
     public function delete($id) {
 
-        $deleteHeader = "DELETE FROM remisiones WHERE pk_id = $id";
-        $deleteArticles = "DELETE FROM mov_remisiones WHERE fk_rem_id = $id";
-        $result = $this->Conexion->eject($deleteHeader);
+        $deleteArticles = "DELETE FROM remisiones_articulos WHERE fk_rem_id = $id";
+        $deleteHeader = "DELETE FROM remisiones WHERE pk_rem_id = $id";   
         $result = $this->Conexion->eject($deleteArticles);
+        $result = $this->Conexion->eject($deleteHeader);
         if (!$result) {
             return 0;
         } else {

@@ -13,11 +13,11 @@ class login {
 
     public function validacion($username, $password) {
         $validacion= null;
-        $sql = "SELECT usuario,contrasena FROM usuarios";
+        $sql = "SELECT * FROM usuarios";
         $query = $this->conexion->eject($sql);
         while ($usuarios = $this->conexion->fetch_assoc($query)) {
 
-            if ($username == $usuarios['usuario'] && $password == $usuarios['contrasena']) {
+            if ($username == $usuarios['usu_username'] && $password == $usuarios['usu_password']) {
 
                 $validacion = 1;
             }

@@ -1,5 +1,5 @@
 $(document).ready(function (e) {
-
+    
     // funcion para procesar los formularios que se envian al controlador
     $("form").submit(function (e) {
         e.preventDefault();
