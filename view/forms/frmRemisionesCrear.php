@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <td>Placa:</td>
-            <td><select name="placa">
+            <td><select name="placa" required><option disabled selected>Seleccione...</option>
                     <?php
                     foreach ($placas as $row):
                         echo "<option value='" . $row['pk_pla_id'] . "'>";
