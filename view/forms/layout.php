@@ -41,7 +41,7 @@
                         </li>
                         <li><a href="#"><span>Tiempos</span></a>
                             <ul>
-                                <li><a href="#"><span>Viajes</span></a></li>
+                                <li><a name ="frmCrear" href="tiempos.Controller.php"><span>Viajes</span></a></li>
                                 <li><a href="#"><span>Consultar</span></a></li>
                                 <li><a href="#"><span>Graficas</span></a></li>
                                 <li><a href="#"><span>Editar</span></a></li>  

@@ -13,7 +13,7 @@ $(document).ready(function (e) {
                 $(".contenido").css('display', 'block');
                 $(".contenido").html("<img src='view/img/loader.gif'><br><h3>Procesando...</h3>");
             },
-            success: function (data) {
+            success: function (data) {              
                 setTimeout(function () {
                     $(".contenido").html(data);
                 }, 400);
