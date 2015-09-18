@@ -25,7 +25,7 @@ input,textArea,select {
     border: 1px solid grey;
 
 }
-button{
+button,input[submit]{
     margin-top:15px;
     border-radius: 5px 5px 5px;
     width: 100px;
