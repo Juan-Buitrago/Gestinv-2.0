@@ -1,5 +1,3 @@
-<script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/jquery.js"></script>
-<script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/ajax.js"></script>
 <h1>Consulta De Remisiones</h1><hr/>
 <p>*Consulte por alguno de los parametros que vera a continuacion*</p>
 <form name="consulta" action ="remisiones.controller.php" method="POST">
@@ -22,7 +20,7 @@
     <hr/>
     <table>
         <tr>
-            <td><button>Buscar</button></td>
+            <td><button onclick="processForms()">Buscar</button></td>
         </tr>
     </table>
 </form>

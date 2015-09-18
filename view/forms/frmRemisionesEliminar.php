@@ -1,5 +1,3 @@
-<script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/jquery.js"></script>
-<script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/ajax.js"></script>
 <h1>Eliminar Remisiones</h1><hr/>
 <p>*Escribe la orden de despacho que desea eliminar*</p>
 <form name="eliminar" action ="remisiones.controller.php" method="POST">
@@ -11,7 +9,7 @@
     </table>
     <table>
         <tr>
-            <td><button>Eliminar</button></td>
+            <td><button onclick="processForms()">Eliminar</button></td>
         </tr>
     </table>
 </form>

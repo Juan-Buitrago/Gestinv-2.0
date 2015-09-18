@@ -1,5 +1,3 @@
-<script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/jquery.js"></script>
-<script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/ajax.js"></script>
 <?php
 if ($process == 0) {
     echo'
@@ -32,7 +30,7 @@ if ($process == 0) {
         </table><hr/>
         <table>
             <tr> 
-                <td><button>Añadir</button> </td>
+                <td><button onclick="processForms()">Añadir</button> </td>
                 </form>
                 <td>
                     <a name="finalizar" href="remisiones.Controller.php"><button>Finalizar</button></a></li>
@@ -71,13 +69,13 @@ if ($process == 0) {
         </table><hr/>
         <table>
             <tr> 
-                <td><button>Añadir</button></td>
+                <td><button onclick="processForms()">Añadir</button></td>
                 </form>
                 <td>
-                     <form name="impresion" action ="remisiones.controller.php" method ="POST"><input type = "hidden" name ="id" value="' . @$save['header']['header']['pk_rem_id'] . '"><button>Imprimir</button></form>
+                     <form name="impresion" action ="remisiones.controller.php" method ="POST"><input type = "hidden" name ="id" value="' . @$save['header']['header']['pk_rem_id'] . '"><button onclick="processForms()">Imprimir</button></form>
                 </td>
                 <td>
-                    <form name="finalizar" action ="remisiones.controller.php" method ="POST"><button>Finalizar</button></form>
+                    <form name="finalizar" action ="remisiones.controller.php" method ="POST"><button onclick="processForms()">Finalizar</button></form>
                 </td>
             </tr>
         </table><hr/>
@@ -123,7 +121,7 @@ if ($process == 0) {
     <table>
         <tr>
             <td>
-                <form name="impresion" action ="remisiones.controller.php" method ="POST"><input type = "hidden" name ="id" value="' . @$header['header']['pk_rem_id'] . '"><button>Imprimir</button></form>
+                <form name="impresion" action ="remisiones.controller.php" method ="POST"><input type = "hidden" name ="id" value="' . @$header['header']['pk_rem_id'] . '"><button onclick="processForms()">Imprimir</button></form>
             </td>
         </tr>
     </table>';
@@ -141,7 +139,7 @@ if ($process == 0) {
 
     foreach ($consult as $row):
         echo "<tr>";
-        echo "<td><form name='consulta' action ='remisiones.controller.php' method ='POST'><input name ='img' type='image'  src='view/img/ok.png'/ style='border:0;background:none;'><input type = 'hidden' name ='id' value=' ". @$row ['pk_rem_id'] ."'></form></td>";
+        echo "<td><form name='consulta' action ='remisiones.controller.php' method ='POST'><input name ='img' type='image'  src='view/img/ok.png'/ style='border:0;background:none;' onclick='processForms()'><input type = 'hidden' name ='id' value=' ". @$row ['pk_rem_id'] ."'></form></td>";
         echo "<td>" . @$row['pk_rem_id'] . "</td>";
         echo "<td>" . @$row['fk_pla_id'] . "</td>";
         echo "<td>" . @$row['rem_fecha'] . "</td>";
@@ -150,7 +148,7 @@ if ($process == 0) {
     echo'</table> 
     <table>
         <tr>
-            <td> <form name="finalizar" action ="remisiones.controller.php" method ="POST"><button>Finalizar</button></form></td>
+            <td> <form name="finalizar" action ="remisiones.controller.php" method ="POST"><button onclick="processForms()">Finalizar</button></form></td>
         </tr>
     </table>';
 }elseif ($process == 4) {
@@ -179,7 +177,7 @@ if ($process == 0) {
                 <td><input type="text" name="observacion" value ="' . $header["header"]["rem_observacion"] . '" size="60"></td>       
             </tr>
             <tr>
-                <td><button>Actualizar</button></td>
+                <td><button onclick="processForms()">Actualizar</button></td>
             </tr>    
     </table>
     </form>
@@ -194,7 +192,7 @@ if ($process == 0) {
 
     foreach ($article as $rows):
         echo '<tr>
-                     <td><form name="editar" action ="remisiones.controller.php" method="POST"><input name ="img" type="image"  src="view/img/edit.png" style="border:0;background:none;"/><input type = "hidden" name ="id_article" value="' . @$rows['pk_rem_art_id'] . '"></form></td>
+                     <td><form name="editar" action ="remisiones.controller.php" method="POST"><input name ="img" type="image"  src="view/img/edit.png" style="border:0;background:none;" onclick="processForms()"/><input type = "hidden" name ="id_article" value="' . @$rows['pk_rem_art_id'] . '"></form></td>
                      <td>' . @$rows['rem_art_codigo'] . '</td>
                      <td>' . @$rows['rem_art_descripcion'] . '</td>
                      <td>' . @$rows['rem_art_cantidad'] . '</td>
@@ -225,7 +223,7 @@ if ($process == 0) {
     echo'
     </table>
     <table>
-        <tr><td><button>Actualizar</button></td></tr>
+        <tr><td><button onclick="processForms()">Actualizar</button></td></tr>
     </table>
     </form>';
 }else if ($process == 6) {
