@@ -165,9 +165,17 @@ if ($process == 0) {
                 <td>' . $header['header']['rem_fecha'] . '</td>
             </tr>
             <tr>
-                <td>Placa:</td>
-                <td><input type ="text" name="placa" value="' . $header['header']['fk_pla_id'] . '" required></td>
-            </tr>  
+            <td>Placa:</td>
+            <td><select name="placa" required><option value="'.$header['header']['fk_pla_id'].'">'.$header['header']['fk_pla_id'].'</option>';
+                   
+                    foreach ($placas as $row):
+                        echo "<option value='" . $row['pk_pla_id'] . "'>";
+                        echo $row['pk_pla_id'];
+                        echo "</option>";
+                    endforeach;
+                  
+         echo' </select></td>
+        </tr>   
             <tr>
                 <td>Id Sak:</td>
                 <td><input type ="text" name="id_sak" value="' . $header['header']['rem_id_sak'] . '"required></td>                                    

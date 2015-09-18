@@ -70,6 +70,7 @@ switch ($proceso) {
             $process = 4; // determina el formulario de resultado a mostrar en remisiones_resultados.php
             $header = $controlador->loadHeader($_REQUEST['id']);
             $article = $controlador->loadArticles($_REQUEST['id']);
+            $placas = $controlador->loadPlacas();
             require_once '../view/forms/frmRemisionesResultados.php';
         }
         break;
