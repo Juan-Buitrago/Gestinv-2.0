@@ -9,6 +9,8 @@
         <link rel="shortcut icon" href="view/img/favicon.ico">
         <script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/jquery.js"></script>
         <script type="application/javascript" language="javascript" src="/Gestinv-2.0/view/js/ajax.js"></script>
+        <script src="/Gestinv-2.0/lib/graficas/js/highcharts.js"></script>
+        <script src="/Gestinv-2.0/lib/graficas/js/modules/exporting.js"></script>
     </head>  
     <body>
         <header>
@@ -19,7 +21,7 @@
                 </div>
                 <div class="float-right">
                     <ul>
-                        <li>Hola! <?php echo $_SESSION['username']  ?></li>
+                        <li>Hola! <?php echo $_SESSION['username'] ?></li>
                         <li><a name="unlog" href="login.Controller.php">Cerrar Session</a></li>
                         <li><a href="">Ayuda</a></li>
                     </ul>
@@ -30,8 +32,8 @@
             <div class="barra-menu-2">
                 <div id="cssmenu">
                     <ul>
-                        <li><a href=""><span>Principal</span></a></li>
-                        <li><a href=""><span>Remisiones</span></a>
+                        <li><a href="#"><span>Principal</span></a></li>
+                        <li><a href="#"><span>Remisiones</span></a>
                             <ul>
                                 <li><a name="frmCrear" href="remisiones.Controller.php"><span>Registrar</span></form></a></li>
                                 <li><a name="frmConsultar" href="remisiones.Controller.php"><span>Consultar</span></a></li>
@@ -42,17 +44,13 @@
                         <li><a href="#"><span>Tiempos</span></a>
                             <ul>
                                 <li><a name ="frmCrear" href="tiempos.Controller.php"><span>Viajes</span></a></li>
-                                <li><a href="#"><span>Consultar</span></a></li>
-                                <li><a href="#"><span>Graficas</span></a></li>
-                                <li><a href="#"><span>Editar</span></a></li>  
+                                <li><a name="frmConsulta" href="tiempos.Controller.php"><span>Consultar</span></a></li>
+                                <li><a name="frmGraficas" href="tiempos.Controller.php"><span>Graficas</span></a></li>
                             </ul>
                         </li>
                         <li><a href="#"><span>Empleados</span></a>
                             <ul>
-                                <li><a href="#"><span>Crear</span></a></li>
-                                <li><a href="#"><span>Editar</span></a></li>
-                                <li><a href="#"><span>Consultar</span></a></li>
-                                <li><a href="#"><span>Eliminar</span></a></li>  
+                                <li><a href="#"><span>Registrar</span></a></li>
                             </ul>
                         </li>
                         <li><a href="#"><span>Vehiculos</span></a>
