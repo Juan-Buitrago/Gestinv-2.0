@@ -38,9 +38,9 @@ if ($process == 0) {
         <td><strong>Destino: </strong> <select name ="destino"><option value="Linea 1">Linea 1</option><option value="Linea 2">Linea 2</option><option value="Linea 3">Linea 3</option><option value="Linea 4">Linea 4</option><option value="Auxiliar Linea 1">Auxiliar Linea 1</option><option value="Auxiliar Linea 2">Auxiliar Linea 2</option><option value="Auxiliar Linea 3">Auxiliar Linea 3</option><option value="Auxiliar Metales">Auxiliar Metales</option><option value="Caja Control">Caja Control</option><option value="Compresores">Compresores</option><option value="Spin Fine">Spin Fine</option><option value="Andres Herrera">Andres Herrera</option><option value="Reprocesos">Reprocesos</option><option value="Lamina">Lamina</option></select></td>
     </tr>
     <tr>
-        <td><strong>Hora pedido: </strong> h<input type ="text" name ="horaPedido" size ="4px"required/>:m<input type ="text" name ="minutoPedido"size ="4px" required/></td>
-        <td><strong>Hora salida: </strong> h<input type ="text" name ="horaSalida"size ="4px" required/>:m<input type ="text" name ="minutoSalida"size ="4px" required/></td>
-        <td><strong>Hora llegada: </strong>h<input type ="text" name ="horaLlegada" size ="4px" required />:m<input type ="text" name ="minutoLlegada" size ="4px" required/></td>
+        <td><strong>Hora pedido: </strong><input type="datetime-local" name="horaPedido"></td>
+        <td><strong>Hora salida: </strong><input type="datetime-local" name="horaSalida"></td>
+        <td><strong>Hora llegada: </strong><input type="datetime-local" name="horaLlegada"></td>
     </tr>                              
     <tr>
         <td colspan ="5" aling="center"><strong>Observacion</strong></td>
@@ -120,9 +120,9 @@ if ($process == 0) {
         <td><strong>Destino: </strong> <select name ="destino"><option value="Linea 1">Linea 1</option><option value="Linea 2">Linea 2</option><option value="Linea 3">Linea 3</option><option value="Linea 4">Linea 4</option><option value="Auxiliar Linea 1">Auxiliar Linea 1</option><option value="Auxiliar Linea 2">Auxiliar Linea 2</option><option value="Auxiliar Linea 3">Auxiliar Linea 3</option><option value="Auxiliar Metales">Auxiliar Metales</option><option value="Caja Control">Caja Control</option><option value="Compresores">Compresores</option><option value="Spin Fine">Spin Fine</option><option value="Andres Herrera">Andres Herrera</option><option value="Reprocesos">Reprocesos</option><option value="Lamina">Lamina</option></select></td>
     </tr>
     <tr>
-        <td><strong>Hora pedido: </strong> h<input type ="text" name ="horaPedido" size ="4px"required/>:m<input type ="text" name ="minutoPedido"size ="4px" required/></td>
-        <td><strong>Hora salida: </strong> h<input type ="text" name ="horaSalida"size ="4px" required/>:m<input type ="text" name ="minutoSalida"size ="4px" required/></td>
-        <td><strong>Hora llegada: </strong>h<input type ="text" name ="horaLlegada" size ="4px" required />:m<input type ="text" name ="minutoLlegada" size ="4px" required/></td>
+        <td><strong>Hora pedido: </strong><input type="datetime-local" name="horaPedido"></td>
+        <td><strong>Hora salida: </strong><input type="datetime-local" name="horaSalida"></td>
+        <td><strong>Hora llegada: </strong><input type="datetime-local" name="horaLlegada"></td>
     </tr>                              
     <tr>
         <td colspan ="5" aling="center"><strong>Observacion</strong></td>

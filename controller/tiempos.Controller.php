@@ -33,7 +33,7 @@ switch ($proceso) {
 
     case("savePedido"):
         $process = 1;
-        $pedidos = $tiempos->pedidos($_REQUEST['id_viaje'], $_REQUEST['doc_mercurio'], $_REQUEST['estado'], $_REQUEST['aprovicionador'], $_REQUEST['destino'], $_REQUEST['horaPedido'], $_REQUEST['minutoPedido'], $_REQUEST['horaSalida'], $_REQUEST['minutoSalida'], $_REQUEST['horaLlegada'], $_REQUEST['minutoLlegada']);
+        $pedidos = $tiempos->pedidos($_REQUEST['id_viaje'], $_REQUEST['doc_mercurio'], $_REQUEST['estado'], $_REQUEST['aprovicionador'], $_REQUEST['destino'], $_REQUEST['horaPedido'],$_REQUEST['horaSalida'],$_REQUEST['horaLlegada']);
         $viaje = $tiempos->loadViaje($_REQUEST['id_viaje']);
         include '../view/forms/frmTiemposResultados.php';
         break;

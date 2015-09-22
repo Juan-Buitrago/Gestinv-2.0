@@ -58,9 +58,9 @@ class tiempos {
         return $this->loadViaje($id);
     }
 
-    public function pedidos($id_viaje, $doc_mercurio, $estado, $aprovicionador, $destino, $horapedido, $minutopedido, $horasalida, $minutosalida, $horallegada, $minutollegada) {
+    public function pedidos($id_viaje, $doc_mercurio, $estado, $aprovicionador, $destino, $horapedido,$horasalida,$horallegada) {
 
-        $sql = "INSERT INTO viajes_pedidos VALUES ('','$id_viaje','$doc_mercurio','$estado','$aprovicionador','$destino','$horapedido:$minutopedido','$horasalida:$minutosalida','$horallegada:$minutollegada')";
+        $sql = "INSERT INTO viajes_pedidos VALUES ('','$id_viaje','$doc_mercurio','$estado','$aprovicionador','$destino','$horapedido','$horasalida','$horallegada')";
         $query = $this->Conexion->eject($sql);
         return $this->loadPedidos($id_viaje);
     }

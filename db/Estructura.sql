@@ -102,9 +102,9 @@ via_ped_doc_mercurio VARCHAR (20),
 via_ped_condicion VARCHAR (20),
 via_ped_aprovicionador VARCHAR (50),
 via_ped_destino VARCHAR(50),
-via_ped_hora_pedido TIME,
-via_ped_hora_salida TIME,
-via_ped_hora_llegada TIME,
+via_ped_hora_pedido DATETIME,
+via_ped_hora_salida DATETIME,
+via_ped_hora_llegada DATETIME,
 PRIMARY KEY (pk_via_ped_id),
 FOREIGN KEY (fk_via_id) REFERENCES viajes (pk_via_id)
 );
