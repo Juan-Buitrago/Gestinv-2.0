@@ -58,9 +58,9 @@ class tiempos {
         return $this->loadViaje($id);
     }
 
-    public function pedidos($id_viaje, $doc_mercurio, $estado, $aprovicionador, $destino, $horapedido,$horasalida,$horallegada) {
+    public function pedidos($id_viaje, $doc_mercurio, $estado, $aprovicionador, $destino, $horapedido, $horasalida, $horallegada, $observacion) {
 
-        $sql = "INSERT INTO viajes_pedidos VALUES ('','$id_viaje','$doc_mercurio','$estado','$aprovicionador','$destino','$horapedido','$horasalida','$horallegada')";
+        $sql = "INSERT INTO viajes_pedidos VALUES ('','$id_viaje','$doc_mercurio','$estado','$aprovicionador','$destino','$horapedido','$horasalida','$horallegada','$observacion')";
         $query = $this->Conexion->eject($sql);
         return $this->loadPedidos($id_viaje);
     }
@@ -89,6 +89,12 @@ class tiempos {
         /* Andres Herrera */$consulta[19] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Andres Herrera'");
         /* Reprocesos */$consulta[20] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Reprocesos'");
         /* Lamina */$consulta[21] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Lamina'");
+        /* STO-611 Mañana */$consulta[22] = $this->Conexion->eject("SELECT COUNT(`fk_pla_id`) AS cantidad FROM viajes WHERE via_fecha BETWEEN '$inicio' AND '$final' AND fk_pla_id = 'STO-611' AND via_turno = 'Manana'");
+        /* STO-611 Tarde */$consulta[23] = $this->Conexion->eject("SELECT COUNT(`fk_pla_id`) AS cantidad FROM viajes WHERE via_fecha BETWEEN '$inicio' AND '$final' AND fk_pla_id = 'STO-611' AND via_turno = 'Tarde'");
+        /* KUL-510 Mañana */$consulta[24] = $this->Conexion->eject("SELECT COUNT(`fk_pla_id`) AS cantidad FROM viajes WHERE via_fecha BETWEEN '$inicio' AND '$final' AND fk_pla_id = 'KUL-510' AND via_turno = 'Manana'");
+        /* KUL-510 Tarde */$consulta[25] = $this->Conexion->eject("SELECT COUNT(`fk_pla_id`) AS cantidad FROM viajes WHERE via_fecha BETWEEN '$inicio' AND '$final' AND fk_pla_id = 'KUL-510' AND via_turno = 'Tarde'");
+        /* Pedido Normal */$consulta[26] = $this->Conexion->eject("SELECT COUNT(`via_ped_condicion`) AS cantidad FROM `viajes_pedidos` INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id`  WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_condicion` = 'Normal'");
+        /* Pedido Critico */$consulta[27] = $this->Conexion->eject("SELECT COUNT(`via_ped_condicion`) AS cantidad FROM `viajes_pedidos` INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id`  WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_condicion` = 'Critico'");
 
         for ($cont = 0; $cont <= count($consulta); $cont++) {
 
@@ -102,32 +108,31 @@ class tiempos {
 
     public function excel($inicio, $final) {
 
+        $conexion = new mysqli('localhost', 'root', '', 'gestinv', 3306);
+        if (mysqli_connect_errno()) {
+            printf("La conexión con el servidor de base de datos falló: %s\n", mysqli_connect_error());
+            exit();
+        }
         $consulta = "
-	SELECT 
-	viajes.`pk_id` AS 'viaje',
-	viajes.`placa`,
-	viajes.`fecha`,
-	viajes.`turno`,
-	viajes.`despachador`,
-	pedidos.`pk_id`,
-        pedidos.`doc_mercurio`,
-	pedidos.`condicion`,
-	pedidos.`aprovicionador`,
-	pedidos.`destino`,
-	pedidos.`detalle_material`,
-	pedidos.`hora_pedido`,
-	pedidos.`hora_salida`,
-	pedidos.`hora_llegada`,
-	pedidos.`tiempo_reaccion`,
-	pedidos.`tiempo_descargue`,
-        pedidos.`observacion`
-	FROM viajes INNER JOIN pedidos 
-	ON viajes.`pk_id` = pedidos.`fk_id_viaje` 
-	WHERE fecha BETWEEN '$inicio' AND '$final'";
+                SELECT 
+                viajes.`pk_via_id` AS 'Viaje', 
+                viajes.`fk_pla_id` AS 'Placa',
+                viajes.`via_fecha` AS 'Fecha',
+                viajes.`via_turno` AS 'Turno',
+                viajes_pedidos.`pk_via_ped_id` AS 'Pedido',
+                viajes_pedidos.`via_ped_doc_mercurio` AS 'Doc Mercurio',
+                viajes_pedidos.`via_ped_condicion` AS 'Condicion',
+                viajes_pedidos.`via_ped_aprovicionador` AS 'Aprovicionador',
+                viajes_pedidos.`via_ped_destino` AS 'Destino',
+                viajes_pedidos.`via_ped_hora_pedido` AS 'Hora Pedido',
+                viajes_pedidos.`via_ped_hora_salida` AS 'Hora Salida',
+                viajes_pedidos.`via_ped_hora_llegada` AS 'Hora Llegada',
+                viajes_pedidos.`via_ped_observacion` AS 'Observacion',
+                FROM viajes INNER JOIN viajes_pedidos
+                ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id`
+                WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final'";
 
-
-
-        $resultado = $this->Conexion->eject($consulta);
+        $resultado = $conexion->query($consulta);
         if ($resultado->num_rows > 0) {
 
             date_default_timezone_set('America/Mexico_City');
@@ -151,7 +156,7 @@ class tiempos {
                     ->setCategory("Reporte excel");
 
             $tituloReporte = "Relación de tiempos en despachos";
-            $titulosColumnas = array('Viaje', 'Placa', 'Fecha', 'Turno', 'Despachador', 'Pedido', 'Doc Mercurio', 'Condicion', 'Aprovicionador', 'Destino', 'Detalle Material', 'Hora Pedido', 'Hora Salida', 'Hora Llegada', 'Tiempo Reaccion', 'Tiempo Descargue', 'Observacion');
+            $titulosColumnas = array('Viaje', 'Placa', 'Fecha', 'Turno', 'Pedido', 'Doc Mercurio', 'Condicion', 'Aprovicionador', 'Destino', 'Hora Pedido', 'Hora Salida', 'Hora Llegada', 'Observacion');
 
             $objPHPExcel->setActiveSheetIndex(0)
                     ->mergeCells('A1:Q1');
@@ -171,33 +176,25 @@ class tiempos {
                     ->setCellValue('J3', $titulosColumnas[9])
                     ->setCellValue('K3', $titulosColumnas[10])
                     ->setCellValue('L3', $titulosColumnas[11])
-                    ->setCellValue('M3', $titulosColumnas[12])
-                    ->setCellValue('N3', $titulosColumnas[13])
-                    ->setCellValue('O3', $titulosColumnas[14])
-                    ->setCellValue('P3', $titulosColumnas[15])
-                    ->setCellValue('Q3', $titulosColumnas[16]);
+                    ->setCellValue('M3', $titulosColumnas[12]);
 
             //Se agregan los datos de los pedidos
             $i = 4;
             while ($fila = $resultado->fetch_array()) {
                 $objPHPExcel->setActiveSheetIndex(0)
-                        ->setCellValue('A' . $i, $fila['viaje'])
-                        ->setCellValue('B' . $i, $fila['placa'])
-                        ->setCellValue('C' . $i, $fila['fecha'])
-                        ->setCellValue('D' . $i, $fila['turno'])
-                        ->setCellValue('E' . $i, $fila['despachador'])
-                        ->setCellValue('F' . $i, $fila['pk_id'])
-                        ->setCellValue('G' . $i, $fila['doc_mercurio'])
-                        ->setCellValue('H' . $i, $fila['condicion'])
-                        ->setCellValue('I' . $i, $fila['aprovicionador'])
-                        ->setCellValue('J' . $i, $fila['destino'])
-                        ->setCellValue('K' . $i, $fila['detalle_material'])
-                        ->setCellValue('L' . $i, $fila['hora_pedido'])
-                        ->setCellValue('M' . $i, $fila['hora_salida'])
-                        ->setCellValue('N' . $i, $fila['hora_llegada'])
-                        ->setCellValue('O' . $i, $fila['tiempo_reaccion'])
-                        ->setCellValue('P' . $i, $fila['tiempo_descargue'])
-                        ->setCellValue('Q' . $i, $fila['observacion']);
+                        ->setCellValue('A' . $i, $fila['Viaje'])
+                        ->setCellValue('B' . $i, $fila['Placa'])
+                        ->setCellValue('C' . $i, $fila['Fecha'])
+                        ->setCellValue('D' . $i, $fila['Turno'])
+                        ->setCellValue('E' . $i, $fila['Pedido'])
+                        ->setCellValue('F' . $i, $fila['Doc Mercurio'])
+                        ->setCellValue('G' . $i, $fila['Condicion'])
+                        ->setCellValue('H' . $i, $fila['Aprovicionador'])
+                        ->setCellValue('I' . $i, $fila['Destino'])
+                        ->setCellValue('J' . $i, $fila['Hora Pedido'])
+                        ->setCellValue('K' . $i, $fila['Hora Salida'])
+                        ->setCellValue('L' . $i, $fila['Hora Llegada'])
+                        ->setCellValue('M' . $i, $fila['Observacion']);
                 $i++;
             }
 

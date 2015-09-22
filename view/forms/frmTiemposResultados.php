@@ -145,6 +145,7 @@ if ($process == 0) {
 $(function () {
     $('#grafica1').highcharts({
         chart: {
+            backgroundColor:'transparent',
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
@@ -202,6 +203,7 @@ $(function () {
     echo"$(function () {
                  $('#grafica2').highcharts({
                     chart: {
+                        backgroundColor:'transparent',
                         plotBackgroundColor: null,
                         plotBorderWidth: null,
                         plotShadow: false
@@ -243,6 +245,7 @@ $(function () {
     echo"$(function () {
                  $('#grafica3').highcharts({
                     chart: {
+                        backgroundColor:'transparent',
                         plotBackgroundColor: null,
                         plotBorderWidth: null,
                         plotShadow: false
@@ -291,9 +294,130 @@ $(function () {
             });
                 </script>';
 
+    //Grafica lineal por destino .
+
+    echo'<script type="text/javascript">';
+    echo "$(function () {
+                        $('#grafica4').highcharts({
+                            chart: {
+                                backgroundColor:'transparent',
+                                type: 'bar'
+                            },
+                            title: {
+                                text: 'Grafica Por Destino'
+                            },
+                            xAxis: {
+                                categories: ['Linea 1', 'Linea 2', 'Linea 3', 'Linea 4', 'Auxiliar Linea 1', 'Auxiliar Linea 2', 'Auxiliar Linea 3', 'Auxiliar Metales', 'Caja Control', 'Compresores', 'Spin Fine', 'Andres Herrera', 'Reprocesos', 'Lamina']
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: {
+                                    text: 'Total Pedidos'
+                                }
+                            },
+                            legend: {
+                                reversed: true
+                            },
+                            plotOptions: {
+                                series: {
+                                    stacking: 'normal'
+                                }
+                            },
+                            series: [{
+                                name: 'Pedidos',
+                                data: [" . $graficas[8]['cantidad'] . "," . $graficas[9]['cantidad'] . "," . $graficas[10]['cantidad'] . "," . $graficas[11]['cantidad'] . "," . $graficas[12]['cantidad'] . "," . $graficas[13]['cantidad'] . "," . $graficas[14]['cantidad'] . "," . $graficas[15]['cantidad'] . "," . $graficas[16]['cantidad'] . "," . $graficas[17]['cantidad'] . "," . $graficas[18]['cantidad'] . "," . $graficas[19]['cantidad'] . "," . $graficas[20]['cantidad'] . "," . $graficas[21]['cantidad'] . "]
+                            }]
+                        });
+                    });
+		       </script>";
+    // Grafica Por Vehiculos   
+    echo '<script type="text/javascript">';
+    echo "
+                $(function () {
+                    $('#grafica5').highcharts({
+                        chart: {
+                            backgroundColor:'transparent',
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Grafica Vehiculos'
+                        },
+                        xAxis: {
+                            categories: ['STO-611', 'KUL-510']
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Total envios'
+                            }
+                        },
+                        tooltip: {
+                            pointFormat: '<span style=" . "color:{series.color}" . ">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                            shared: true
+                        },
+                        plotOptions: {
+                            column: {
+                                stacking: 'percent'
+                            }
+                        },
+                        series: [{
+                            name: 'Tarde',
+                            data: [" . $graficas[23]['cantidad'] . "," . $graficas[25]['cantidad'] . "]
+                        }, {
+                            name: 'Mañana',
+                            data: [" . $graficas[22]['cantidad'] . "," . $graficas[24]['cantidad'] . "]
+                        }]
+                    });
+                });
+                </script>";
+
+    // Grafica de totales de pedidos Criticos y normales  
+    echo'<script type="text/javascript">';
+    echo" $(function () {
+                  $('#grafica6').highcharts({
+                    chart: {
+                        backgroundColor:'transparent',
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false
+                    },
+                    title: {
+                        text: 'Graficas totales pedidos'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                style: {
+                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                }
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: 'Cantidad Pedidos',
+                        data: [";
+    echo "['Criticos: " . $graficas[27]['cantidad'] . " =>'," . $graficas[27]['cantidad'] . "],";
+    echo "['Normal: " . $graficas[26]['cantidad'] . " =>'," . $graficas[26]['cantidad'] . "],";
+    echo'            
+                              ]
+                    }]
+                });
+            });
+               </script>';
     echo"
 <div id = 'grafica1' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div><hr/>
 <div id = 'grafica2' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div><hr/>
-<div id = 'grafica3' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div>";
+<div id = 'grafica3' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div><hr/>
+<div id = 'grafica4' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div><hr/>
+<div id = 'grafica5' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div><hr/>
+<div id = 'grafica6' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div>";
 }
 ?>
