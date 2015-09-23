@@ -35,7 +35,17 @@ if ($process == 0) {
         <td><strong>Aprovicionador: </strong><select name ="aprovicionador"><option value="Carlos Montes">Carlos Montes</option><option value="Andres Montoya">Andres Montoya</option><option value="Angel Gonzales">Angel Gonzales</option><option value="Jorge Jimenez">Jorge Jimenez</option><option value="Andres Herrera">Andres Herrera</option><option value="Reprocesos">Reprocesos</option></select></td>
     </tr>
     <tr>
-        <td><strong>Destino: </strong> <select name ="destino"><option value="Linea 1">Linea 1</option><option value="Linea 2">Linea 2</option><option value="Linea 3">Linea 3</option><option value="Linea 4">Linea 4</option><option value="Auxiliar Linea 1">Auxiliar Linea 1</option><option value="Auxiliar Linea 2">Auxiliar Linea 2</option><option value="Auxiliar Linea 3">Auxiliar Linea 3</option><option value="Auxiliar Metales">Auxiliar Metales</option><option value="Caja Control">Caja Control</option><option value="Compresores">Compresores</option><option value="Spin Fine">Spin Fine</option><option value="Andres Herrera">Andres Herrera</option><option value="Reprocesos">Reprocesos</option><option value="Lamina">Lamina</option></select></td>
+        <td>Destino:
+            <select name="destino" required><option disabled selected>Seleccione...</option>';
+                   
+                    foreach ($destinos as $row):
+                        echo "<option value='" . $row['pk_des_id'] . "'>";
+                        echo $row['des_nombre'];
+                        echo "</option>";
+                    endforeach;
+     echo'
+                </select>
+        </td>
     </tr>
     <tr>
         <td><strong>Hora pedido: </strong><input type="datetime-local" name="horaPedido"></td>
@@ -117,7 +127,17 @@ if ($process == 0) {
         <td><strong>Aprovicionador: </strong><select name ="aprovicionador"><option value="Carlos Montes">Carlos Montes</option><option value="Andres Montoya">Andres Montoya</option><option value="Angel Gonzales">Angel Gonzales</option><option value="Jorge Jimenez">Jorge Jimenez</option><option value="Andres Herrera">Andres Herrera</option><option value="Reprocesos">Reprocesos</option></select></td>
     </tr>
     <tr>
-        <td><strong>Destino: </strong> <select name ="destino"><option value="Linea 1">Linea 1</option><option value="Linea 2">Linea 2</option><option value="Linea 3">Linea 3</option><option value="Linea 4">Linea 4</option><option value="Auxiliar Linea 1">Auxiliar Linea 1</option><option value="Auxiliar Linea 2">Auxiliar Linea 2</option><option value="Auxiliar Linea 3">Auxiliar Linea 3</option><option value="Auxiliar Metales">Auxiliar Metales</option><option value="Caja Control">Caja Control</option><option value="Compresores">Compresores</option><option value="Spin Fine">Spin Fine</option><option value="Andres Herrera">Andres Herrera</option><option value="Reprocesos">Reprocesos</option><option value="Lamina">Lamina</option></select></td>
+    <td>Destino:
+            <select name="destino" required><option disabled selected>Seleccione...</option>';
+                   
+                    foreach ($destinos as $row):
+                        echo "<option value='" . $row['pk_des_id'] . "'>";
+                        echo $row['des_nombre'];
+                        echo "</option>";
+                    endforeach;
+     echo'
+                </select>
+        </td>
     </tr>
     <tr>
         <td><strong>Hora pedido: </strong><input type="datetime-local" name="horaPedido"></td>
@@ -273,20 +293,20 @@ $(function () {
                         type: 'pie',
                         name: 'Cantidad Pedidos',
                         data: [";
-    echo "['Linea 1 (" . $graficas[8]['cantidad'] . ")'," . $graficas[8]['cantidad'] . "],";
-    echo "['Linea 2 (" . $graficas[9]['cantidad'] . ")'," . $graficas[9]['cantidad'] . "],";
-    echo "['Linea 3 (" . $graficas[10]['cantidad'] . ")'," . $graficas[10]['cantidad'] . "],";
-    echo "['Linea 4 (" . $graficas[11]['cantidad'] . ")'," . $graficas[11]['cantidad'] . "],";
-    echo "['Auxiliar Linea 1 (" . $graficas[12]['cantidad'] . ")'," . $graficas[12]['cantidad'] . "],";
-    echo "['Auxiliar Linea 2 (" . $graficas[13]['cantidad'] . ")'," . $graficas[13]['cantidad'] . "],";
-    echo "['Auxiliar Linea 3 (" . $graficas[14]['cantidad'] . ")'," . $graficas[14]['cantidad'] . "],";
-    echo "['Auxiliar Metales (" . $graficas[15]['cantidad'] . ")'," . $graficas[15]['cantidad'] . "],";
-    echo "['Caja Control (" . $graficas[16]['cantidad'] . ")'," . $graficas[16]['cantidad'] . "],";
-    echo "['Compresores (" . $graficas[17]['cantidad'] . ")'," . $graficas[17]['cantidad'] . "],";
-    echo "['Spin Fine (" . $graficas[18]['cantidad'] . ")'," . $graficas[18]['cantidad'] . "],";
-    echo "['Andres Herrera (" . $graficas[19]['cantidad'] . ")'," . $graficas[19]['cantidad'] . "],";
-    echo "['Reprocesos(" . $graficas[20]['cantidad'] . ")'," . $graficas[20]['cantidad'] . "],";
-    echo "['Lamina (" . $graficas[21]['cantidad'] . ")'," . $graficas[21]['cantidad'] . "],";
+    echo "['Andres Herrera (" . $graficas[0]['Cantidad'] . ")'," . $graficas[0]['Cantidad'] . "],";
+    echo "['Auxiliar Linea 1 (" . $graficas[1]['Cantidad'] . ")'," . $graficas[1]['Cantidad'] . "],";
+    echo "['Auxiliar Linea 2 (" . $graficas[2]['Cantidad'] . ")'," . $graficas[2]['Cantidad'] . "],";
+    echo "['Auxiliar Linea 3 (" . $graficas[3]['Cantidad'] . ")'," . $graficas[3]['Cantidad'] . "],";
+    echo "['Auxiliar Metales (" . $graficas[4]['Cantidad'] . ")'," . $graficas[4]['Cantidad'] . "],";
+    echo "['Caja Control (" . $graficas[5]['Cantidad'] . ")'," . $graficas[5]['Cantidad'] . "],";
+    echo "['Compresores (" . $graficas[6]['Cantidad'] . ")'," . $graficas[6]['Cantidad'] . "],";
+    echo "['Lamina (" . $graficas[7]['Cantidad'] . ")'," . $graficas[7]['Cantidad'] . "],";
+    echo "['Linea 1 (" . $graficas[8]['Cantidad'] . ")'," . $graficas[8]['Cantidad'] . "],";
+    echo "['Linea 2 (" . $graficas[9]['Cantidad'] . ")'," . $graficas[9]['Cantidad'] . "],";
+    echo "['Linea 3 (" . $graficas[10]['Cantidad'] . ")'," . $graficas[10]['Cantidad'] . "],";
+    echo "['Linea 4 (" . $graficas[11]['Cantidad'] . ")'," . $graficas[11]['Cantidad'] . "],";
+    echo "['Reprocesos(" . $graficas[12]['Cantidad'] . ")'," . $graficas[12]['Cantidad'] . "],";
+    echo "['Spin Five (" . $graficas[13]['Cantidad'] . ")'," . $graficas[13]['Cantidad'] . "],";
     echo'            
                         ]
                     }]

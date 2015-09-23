@@ -28,6 +28,7 @@ switch ($proceso) {
     case("saveViaje"):
         $process = 0;
         $save = $tiempos->viajes($_REQUEST['fecha'], $_REQUEST['placa'], $_REQUEST['despachador'], $_REQUEST['turno']);
+        $destinos = $tiempos->loadDestinos();
         include '../view/forms/frmTiemposResultados.php';
         break;
 
@@ -35,6 +36,7 @@ switch ($proceso) {
         $process = 1;
         $pedidos = $tiempos->pedidos($_REQUEST['id_viaje'], $_REQUEST['doc_mercurio'], $_REQUEST['estado'], $_REQUEST['aprovicionador'], $_REQUEST['destino'], $_REQUEST['horaPedido'],$_REQUEST['horaSalida'],$_REQUEST['horaLlegada'],$_REQUEST['observacion']);
         $viaje = $tiempos->loadViaje($_REQUEST['id_viaje']);
+        $destinos = $tiempos->loadDestinos();
         include '../view/forms/frmTiemposResultados.php';
         break;
     case("consulta"):

@@ -42,6 +42,16 @@ class tiempos {
         }
         return $result;
     }
+    public function loadDestinos(){
+        
+        $sql = "SELECT * FROM destinos";     
+        $query = $this->Conexion->eject($sql);
+        while($row = $this->Conexion->fetch_assoc($query)){
+            $result[]= $row;     
+        }
+        return $result;
+    }
+    
 
     public function viajes($fecha, $placa, $despachador, $turno) {
 
@@ -67,6 +77,16 @@ class tiempos {
 
     public function graficas($inicio, $final) {
 
+        /*Consulta Destino*/ $destinos = $this->Conexion->eject("SELECT destinos.`des_nombre` AS 'Destino', count(viajes_pedidos.`fk_des_id`) AS 'Cantidad' FROM  destinos LEFT JOIN viajes_pedidos ON destinos.`pk_des_id` = viajes_pedidos.`fk_des_id` GROUP BY (destinos.`des_nombre`) ORDER BY `des_nombre`");
+        
+        while($row = $this->Conexion->fetch_assoc($destinos)){
+            
+            $result[] = $row;
+        }
+        
+        
+        return $result;
+        
         /* Montes */ $consulta[0] = $this->Conexion->eject("SELECT COUNT(`via_ped_aprovicionador`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_aprovicionador` = 'Carlos Montes'");
         /* Montoya */ $consulta[1] = $this->Conexion->eject("SELECT COUNT(`via_ped_aprovicionador`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_aprovicionador` = 'Andres Montoya'");
         /* Jimenez */ $consulta[2] = $this->Conexion->eject("SELECT COUNT(`via_ped_aprovicionador`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_aprovicionador` = 'Jorge Jimenez'");
@@ -75,20 +95,6 @@ class tiempos {
         /* Reprocesos */$consulta[5] = $this->Conexion->eject("SELECT COUNT(`via_ped_aprovicionador`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_aprovicionador` = 'Reprocesos'");
         /* Turno Mañana */$consulta[6] = $this->Conexion->eject("SELECT COUNT(`via_turno`) AS cantidad FROM viajes WHERE via_fecha BETWEEN '$inicio' and '$final' and via_turno = 'Manana'");
         /* Turno Tarde */$consulta[7] = $this->Conexion->eject("SELECT COUNT(`via_turno`) AS cantidad FROM viajes WHERE via_fecha BETWEEN '$inicio' and '$final' and via_turno = 'Tarde'");
-        /* Linea 1 */$consulta[8] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Linea 1'");
-        /* Linea 2 */$consulta[9] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Linea 2'");
-        /* Linea 3 */$consulta[10] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Linea 3'");
-        /* Linea 4 */$consulta[11] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Linea 4'");
-        /* Auxiliar linea 1 */$consulta[12] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Auxiliar Linea 1'");
-        /* Auxiliar linea 2 */$consulta[13] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Auxiliar Linea 2'");
-        /* Auxiliar linea 3 */$consulta[14] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Auxiliar Linea 3'");
-        /* Auxiliar Metales */$consulta[15] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Auxiliar Metales'");
-        /* Caja Control */$consulta[16] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Caja Control'");
-        /* Compresores */$consulta[17] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Compresores'");
-        /* Spin Fine */$consulta[18] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Spin Fine'");
-        /* Andres Herrera */$consulta[19] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Andres Herrera'");
-        /* Reprocesos */$consulta[20] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Reprocesos'");
-        /* Lamina */$consulta[21] = $this->Conexion->eject("SELECT COUNT(`via_ped_destino`) AS cantidad FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_destino` = 'Lamina'");
         /* STO-611 Mañana */$consulta[22] = $this->Conexion->eject("SELECT COUNT(`fk_pla_id`) AS cantidad FROM viajes WHERE via_fecha BETWEEN '$inicio' AND '$final' AND fk_pla_id = 'STO-611' AND via_turno = 'Manana'");
         /* STO-611 Tarde */$consulta[23] = $this->Conexion->eject("SELECT COUNT(`fk_pla_id`) AS cantidad FROM viajes WHERE via_fecha BETWEEN '$inicio' AND '$final' AND fk_pla_id = 'STO-611' AND via_turno = 'Tarde'");
         /* KUL-510 Mañana */$consulta[24] = $this->Conexion->eject("SELECT COUNT(`fk_pla_id`) AS cantidad FROM viajes WHERE via_fecha BETWEEN '$inicio' AND '$final' AND fk_pla_id = 'KUL-510' AND via_turno = 'Manana'");
@@ -96,14 +102,14 @@ class tiempos {
         /* Pedido Normal */$consulta[26] = $this->Conexion->eject("SELECT COUNT(`via_ped_condicion`) AS cantidad FROM `viajes_pedidos` INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id`  WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_condicion` = 'Normal'");
         /* Pedido Critico */$consulta[27] = $this->Conexion->eject("SELECT COUNT(`via_ped_condicion`) AS cantidad FROM `viajes_pedidos` INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id`  WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_condicion` = 'Critico'");
 
+        /*
         for ($cont = 0; $cont <= count($consulta); $cont++) {
 
             while ($row = $this->Conexion->fetch_assoc(@$consulta[$cont])) {
-
                 $resultado[] = $row;
             }
         }
-        return $resultado;
+        return $resultado;*/
     }
 
     public function excel($inicio, $final) {
