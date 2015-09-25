@@ -32,18 +32,28 @@ if ($process == 0) {
         <td><strong>Estado del pedido: </strong><select name ="estado"><option value="Normal">Normal</option><option value="Critico">Critico</option></select></td>
     </tr>
     <tr>
-        <td><strong>Aprovicionador: </strong><select name ="aprovicionador"><option value="Carlos Montes">Carlos Montes</option><option value="Andres Montoya">Andres Montoya</option><option value="Angel Gonzales">Angel Gonzales</option><option value="Jorge Jimenez">Jorge Jimenez</option><option value="Andres Herrera">Andres Herrera</option><option value="Reprocesos">Reprocesos</option></select></td>
+        <td>Aprovicionadores:
+            <select name="aprovicionador" required><option disabled selected>Seleccione...</option>';
+
+    foreach ($aprovicionadores as $row):
+        echo "<option value='" . $row['pk_apr_id'] . "'>";
+        echo $row['apr_nombre'];
+        echo "</option>";
+    endforeach;
+    echo'
+                </select>
+        </td>        
     </tr>
     <tr>
         <td>Destino:
             <select name="destino" required><option disabled selected>Seleccione...</option>';
-                   
-                    foreach ($destinos as $row):
-                        echo "<option value='" . $row['pk_des_id'] . "'>";
-                        echo $row['des_nombre'];
-                        echo "</option>";
-                    endforeach;
-     echo'
+
+    foreach ($destinos as $row):
+        echo "<option value='" . $row['pk_des_id'] . "'>";
+        echo $row['des_nombre'];
+        echo "</option>";
+    endforeach;
+    echo'
                 </select>
         </td>
     </tr>
@@ -104,8 +114,8 @@ if ($process == 0) {
 
     foreach ($pedidos as $row):
         echo "<tr>";
-        echo "<td>" . $row['via_ped_aprovicionador'] . "</td>";
-        echo "<td>" . $row['via_ped_destino'] . "</td>";
+        echo "<td>" . $row['fk_apr_id'] . "</td>";
+        echo "<td>" . $row['fk_des_id'] . "</td>";
         echo "<td>" . $row['via_ped_condicion'] . "</td>";
         echo "<td>" . $row['via_ped_hora_pedido'] . "</td>";
         echo "<td>" . $row['via_ped_hora_salida'] . "</td>";
@@ -124,18 +134,28 @@ if ($process == 0) {
         <td><strong>Estado del pedido: </strong><select name ="estado"><option value="Normal">Normal</option><option value="Critico">Critico</option></select></td>
     </tr>
     <tr>
-        <td><strong>Aprovicionador: </strong><select name ="aprovicionador"><option value="Carlos Montes">Carlos Montes</option><option value="Andres Montoya">Andres Montoya</option><option value="Angel Gonzales">Angel Gonzales</option><option value="Jorge Jimenez">Jorge Jimenez</option><option value="Andres Herrera">Andres Herrera</option><option value="Reprocesos">Reprocesos</option></select></td>
-    </tr>
+       <td>Aprovicionadores:
+            <select name="aprovicionador" required><option disabled selected>Seleccione...</option>';
+
+    foreach ($aprovicionadores as $row):
+        echo "<option value='" . $row['pk_apr_id'] . "'>";
+        echo $row['apr_nombre'];
+        echo "</option>";
+    endforeach;
+    echo'
+                </select>
+        </td>        
+</tr>
     <tr>
     <td>Destino:
             <select name="destino" required><option disabled selected>Seleccione...</option>';
-                   
-                    foreach ($destinos as $row):
-                        echo "<option value='" . $row['pk_des_id'] . "'>";
-                        echo $row['des_nombre'];
-                        echo "</option>";
-                    endforeach;
-     echo'
+
+    foreach ($destinos as $row):
+        echo "<option value='" . $row['pk_des_id'] . "'>";
+        echo $row['des_nombre'];
+        echo "</option>";
+    endforeach;
+    echo'
                 </select>
         </td>
     </tr>
@@ -159,175 +179,75 @@ if ($process == 0) {
     </tr>
 </table></form>';
 }elseif ($process == 2) {
-
-    echo"
-    <script type='text/javascript'>
+    echo"<h1>Sistema De Graficas</h1><hr/>";
+    echo "
+   <script type='text/javascript'>
 $(function () {
-    $('#grafica1').highcharts({
-        chart: {
-            backgroundColor:'transparent',
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: 'Pedidos Por Aprovicionador'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
+
+    $(document).ready(function () {
+
+        // Build the chart
+        $('#grafica1').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Pedidos Por Destino'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
                 }
-            }
-        },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: 'Carlos Montes: " . $graficas[0]['cantidad'] . " ',
-                y:" . $graficas[0]['cantidad'] . "
-            }, {
-                name: 'Andres Montoya: " . $graficas[1]['cantidad'] . " ',
-                y:" . $graficas[1]['cantidad'] . ",
-            }, {
-                name: 'Jorge Jimenez: " . $graficas[2]['cantidad'] . " ',
-                y: " . $graficas[2]['cantidad'] . "
-            }, {
-                name: 'Angel Gonzales: " . $graficas[3]['cantidad'] . " ',
-                y: " . $graficas[3]['cantidad'] . "
-            }, {
-                name: 'Andres Herrera: " . $graficas[4]['cantidad'] . " ',
-                y: " . $graficas[4]['cantidad'] . "
-            }, {
-                name: 'Reprocesos: " . $graficas[5]['cantidad'] . " ',
-                y: " . $graficas[5]['cantidad'] . "
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [";
+
+                    foreach ($destinos as $row):
+                        echo "{";
+                        echo "name: '" . $row['Destino'] . "',";
+                        echo "y:" . $row['Cantidad'] . "";
+                        echo "},";
+                    endforeach;
+                    echo"]
             }]
-        }]
+        });
     });
 });
-</script>";
-
-//Grafica de los pedidos por turno  (Mañana - Tarde)
-
-    echo'<script type="text/javascript">';
-    echo"$(function () {
-                 $('#grafica2').highcharts({
-                    chart: {
-                        backgroundColor:'transparent',
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false
-                    },
-                    title: {
-                        text: 'Graficas pedidos por turno'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: true,
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                style: {
-                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                }
-                            }
-                        }
-                    },
-                    series: [{
-                        type: 'pie',
-                        name: 'Cantidad Pedidos',
-                        data: [";
-    echo "['Mañana: " . $graficas[6]['cantidad'] . " =>'," . $graficas[6]['cantidad'] . "],";
-    echo "['Tarde: " . $graficas[7]['cantidad'] . " =>'," . $graficas[7]['cantidad'] . "],";
-    echo'            
-                            ]
-                    }]
-                });
-            });
-                </script>';
-
-    // Grafica de torta por pedidos por destino 
-    echo'<script type="text/javascript">';
-    echo"$(function () {
-                 $('#grafica3').highcharts({
-                    chart: {
-                        backgroundColor:'transparent',
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false
-                    },
-                    title: {
-                        text: 'Graficas pedidos por destino'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: true,
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                style: {
-                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                }
-                            }
-                        }
-                    },
-                    series: [{
-                        type: 'pie',
-                        name: 'Cantidad Pedidos',
-                        data: [";
-    echo "['Andres Herrera (" . $graficas[0]['Cantidad'] . ")'," . $graficas[0]['Cantidad'] . "],";
-    echo "['Auxiliar Linea 1 (" . $graficas[1]['Cantidad'] . ")'," . $graficas[1]['Cantidad'] . "],";
-    echo "['Auxiliar Linea 2 (" . $graficas[2]['Cantidad'] . ")'," . $graficas[2]['Cantidad'] . "],";
-    echo "['Auxiliar Linea 3 (" . $graficas[3]['Cantidad'] . ")'," . $graficas[3]['Cantidad'] . "],";
-    echo "['Auxiliar Metales (" . $graficas[4]['Cantidad'] . ")'," . $graficas[4]['Cantidad'] . "],";
-    echo "['Caja Control (" . $graficas[5]['Cantidad'] . ")'," . $graficas[5]['Cantidad'] . "],";
-    echo "['Compresores (" . $graficas[6]['Cantidad'] . ")'," . $graficas[6]['Cantidad'] . "],";
-    echo "['Lamina (" . $graficas[7]['Cantidad'] . ")'," . $graficas[7]['Cantidad'] . "],";
-    echo "['Linea 1 (" . $graficas[8]['Cantidad'] . ")'," . $graficas[8]['Cantidad'] . "],";
-    echo "['Linea 2 (" . $graficas[9]['Cantidad'] . ")'," . $graficas[9]['Cantidad'] . "],";
-    echo "['Linea 3 (" . $graficas[10]['Cantidad'] . ")'," . $graficas[10]['Cantidad'] . "],";
-    echo "['Linea 4 (" . $graficas[11]['Cantidad'] . ")'," . $graficas[11]['Cantidad'] . "],";
-    echo "['Reprocesos(" . $graficas[12]['Cantidad'] . ")'," . $graficas[12]['Cantidad'] . "],";
-    echo "['Spin Five (" . $graficas[13]['Cantidad'] . ")'," . $graficas[13]['Cantidad'] . "],";
-    echo'            
-                        ]
-                    }]
-                });
-            });
-                </script>';
+		</script>
+                <div id='grafica1'></div><hr/>";
 
     //Grafica lineal por destino .
-
-    echo'<script type="text/javascript">';
-    echo "$(function () {
-                        $('#grafica4').highcharts({
+    echo "
+<script type='text/javascript'>;
+        $(function () {
+                        $('#grafica2').highcharts({
                             chart: {
-                                backgroundColor:'transparent',
                                 type: 'bar'
                             },
                             title: {
-                                text: 'Grafica Por Destino'
+                                text: 'Pedidos Por Destino'
                             },
                             xAxis: {
-                                categories: ['Linea 1', 'Linea 2', 'Linea 3', 'Linea 4', 'Auxiliar Linea 1', 'Auxiliar Linea 2', 'Auxiliar Linea 3', 'Auxiliar Metales', 'Caja Control', 'Compresores', 'Spin Fine', 'Andres Herrera', 'Reprocesos', 'Lamina']
+                                categories: [";
+                                    foreach ($destinos as $row):
+                                        echo "'";
+                                        echo $row['Destino'];
+                                        echo "',";
+                                    endforeach;
+                                    echo "      ]
                             },
                             yAxis: {
                                 min: 0,
@@ -344,100 +264,65 @@ $(function () {
                                 }
                             },
                             series: [{
-                                name: 'Pedidos',
-                                data: [" . $graficas[8]['cantidad'] . "," . $graficas[9]['cantidad'] . "," . $graficas[10]['cantidad'] . "," . $graficas[11]['cantidad'] . "," . $graficas[12]['cantidad'] . "," . $graficas[13]['cantidad'] . "," . $graficas[14]['cantidad'] . "," . $graficas[15]['cantidad'] . "," . $graficas[16]['cantidad'] . "," . $graficas[17]['cantidad'] . "," . $graficas[18]['cantidad'] . "," . $graficas[19]['cantidad'] . "," . $graficas[20]['cantidad'] . "," . $graficas[21]['cantidad'] . "]
-                            }]
+                                      name:'Pedidos',
+                                      data:[";
+                                foreach ($destinos as $row):
+                                    echo $row['Cantidad'];
+                                    echo ",";
+                                endforeach;
+                                echo "]}]
                         });
                     });
-		       </script>";
-    // Grafica Por Vehiculos   
-    echo '<script type="text/javascript">';
-    echo "
-                $(function () {
-                    $('#grafica5').highcharts({
-                        chart: {
-                            backgroundColor:'transparent',
-                            type: 'column'
-                        },
-                        title: {
-                            text: 'Grafica Vehiculos'
-                        },
-                        xAxis: {
-                            categories: ['STO-611', 'KUL-510']
-                        },
-                        yAxis: {
-                            min: 0,
-                            title: {
-                                text: 'Total envios'
-                            }
-                        },
-                        tooltip: {
-                            pointFormat: '<span style=" . "color:{series.color}" . ">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-                            shared: true
-                        },
-                        plotOptions: {
-                            column: {
-                                stacking: 'percent'
-                            }
-                        },
-                        series: [{
-                            name: 'Tarde',
-                            data: [" . $graficas[23]['cantidad'] . "," . $graficas[25]['cantidad'] . "]
-                        }, {
-                            name: 'Mañana',
-                            data: [" . $graficas[22]['cantidad'] . "," . $graficas[24]['cantidad'] . "]
-                        }]
-                    });
-                });
-                </script>";
+		       </script>
+    <div id='grafica2'></div><hr/>";
 
-    // Grafica de totales de pedidos Criticos y normales  
-    echo'<script type="text/javascript">';
-    echo" $(function () {
-                  $('#grafica6').highcharts({
-                    chart: {
-                        backgroundColor:'transparent',
-                        plotBackgroundColor: null,
-                        plotBorderWidth: null,
-                        plotShadow: false
+    echo "
+   <script type='text/javascript'>
+$(function () {
+
+    $(document).ready(function () {
+
+        // Build the chart
+        $('#grafica3').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Pedidos Por Aprovicionador'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
                     },
-                    title: {
-                        text: 'Graficas totales pedidos'
-                    },
-                    tooltip: {
-                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                    },
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            dataLabels: {
-                                enabled: true,
-                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                style: {
-                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                }
-                            }
-                        }
-                    },
-                    series: [{
-                        type: 'pie',
-                        name: 'Cantidad Pedidos',
-                        data: [";
-    echo "['Criticos: " . $graficas[27]['cantidad'] . " =>'," . $graficas[27]['cantidad'] . "],";
-    echo "['Normal: " . $graficas[26]['cantidad'] . " =>'," . $graficas[26]['cantidad'] . "],";
-    echo'            
-                              ]
-                    }]
-                });
-            });
-               </script>';
-    echo"
-<div id = 'grafica1' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div><hr/>
-<div id = 'grafica2' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div><hr/>
-<div id = 'grafica3' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div><hr/>
-<div id = 'grafica4' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div><hr/>
-<div id = 'grafica5' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div><hr/>
-<div id = 'grafica6' style = 'min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto'></div>";
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [";
+
+                foreach ($aprovicionadores as $row):
+                    echo "{";
+                    echo "name: '" . $row['Aprovicionadores'] . "',";
+                    echo "y:" . $row['Cantidad'] . "";
+                    echo "},";
+                endforeach;
+                echo"]
+            }]
+        });
+    });
+});
+		</script>
+                <div id='grafica3'></div><hr/>";
 }
 ?>

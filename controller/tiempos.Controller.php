@@ -29,6 +29,7 @@ switch ($proceso) {
         $process = 0;
         $save = $tiempos->viajes($_REQUEST['fecha'], $_REQUEST['placa'], $_REQUEST['despachador'], $_REQUEST['turno']);
         $destinos = $tiempos->loadDestinos();
+        $aprovicionadores = $tiempos->loadAprovicionadores();
         include '../view/forms/frmTiemposResultados.php';
         break;
 
@@ -37,6 +38,7 @@ switch ($proceso) {
         $pedidos = $tiempos->pedidos($_REQUEST['id_viaje'], $_REQUEST['doc_mercurio'], $_REQUEST['estado'], $_REQUEST['aprovicionador'], $_REQUEST['destino'], $_REQUEST['horaPedido'],$_REQUEST['horaSalida'],$_REQUEST['horaLlegada'],$_REQUEST['observacion']);
         $viaje = $tiempos->loadViaje($_REQUEST['id_viaje']);
         $destinos = $tiempos->loadDestinos();
+        $aprovicionadores = $tiempos->loadAprovicionadores();
         include '../view/forms/frmTiemposResultados.php';
         break;
     case("consulta"):
@@ -45,7 +47,8 @@ switch ($proceso) {
     
     case("graficas"):
         $process = 2;
-        $graficas = $tiempos->graficas($_REQUEST['inicio'], $_REQUEST['fin']);
+        $destinos = $tiempos->graficas(1,$_REQUEST['inicio'], $_REQUEST['fin']);
+        $aprovicionadores = $tiempos->graficas(2,$_REQUEST['inicio'], $_REQUEST['fin']);
         include '../view/forms/frmTiemposResultados.php';
         break;
 }

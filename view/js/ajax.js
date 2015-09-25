@@ -7,7 +7,7 @@ $(document).ready(function (e) {
         $(".contenido").empty();
         $.ajax({
             type: "POST",
-            url: "/Gestinv-2.0/controller/" + controller,
+            url: "../../../controller/" + controller,
             data: "&petition=" + action,
             beforeSend: function (xhr) {
                 $(".contenido").css('display', 'block');
@@ -38,7 +38,7 @@ function processForms() {
         $(".contenido").empty();
         $.ajax({
             type: "POST",
-            url: "/Gestinv-2.0/controller/" + controller,
+            url: "../../../controller/" + controller,
             data: data + "&petition=" + action,
             beforeSend: function (xhr) {
                 $(".contenido").html("<img src='view/img/loader.gif'><br><h3>Procesando...</h3>");
