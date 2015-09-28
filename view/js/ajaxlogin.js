@@ -14,7 +14,7 @@ function ajax(controller, action, data) {
         url: "../../../controller/"+controller,
         data: data + "&petition=" + action,
         beforeSend: function (xhr) {
-            $(".contenido").html("<img src='view/img/loader.gif'><br><h3>Procesando...</h3>");
+            $(".contenido").html("<i class='fa fa-spinner fa-pulse'></i><br><h3>Procesando...</h3>");
         },
         success: function (data) {
             setTimeout(function () {

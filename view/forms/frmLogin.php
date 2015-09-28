@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../../view/css/login.css">
+        <link rel="stylesheet" href="../../view/css/font-awesome.min.css">
         <script type="application/javascript" language="javascript" src="../../view/js/jquery.js"></script>
         <script type="application/javascript" language="javascript" src="../../view/js/ajaxlogin.js"></script>
         <link rel="shortcut icon" href="../../view/img/favicon.ico">
