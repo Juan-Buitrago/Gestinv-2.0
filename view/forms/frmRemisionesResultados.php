@@ -32,9 +32,6 @@ if ($process == 0) {
             <tr> 
                 <td><button onclick="processForms()">Añadir</button> </td>
                 </form>
-                <td>
-                    <a name="finalizar" href="remisiones.Controller.php"><button>Finalizar</button></a></li>
-                </td>
             </tr>
         </table>';
 } elseif ($process == 1) {
@@ -73,10 +70,7 @@ if ($process == 0) {
                 </form>
                 <td>
                      <form name="impresion" action ="remisiones.controller.php" method ="POST"><input type = "hidden" name ="id" value="' . @$save['header']['header']['pk_rem_id'] . '"><button onclick="processForms()">Imprimir</button></form>
-                </td>
-                <td>
-                    <form name="finalizar" action ="remisiones.controller.php" method ="POST"><button onclick="processForms()">Finalizar</button></form>
-                </td>
+                </td>    
             </tr>
         </table><hr/>
         <table border="1" width="700" style="text-align: center">';

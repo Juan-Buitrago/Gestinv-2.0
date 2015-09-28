@@ -38,13 +38,19 @@ class loginController {
             
            echo "<script>alert('El usuario y contrasena son incorrectas')</script>";
            
-           echo '<meta http-equiv="refresh" content="0; url="/>';
+            echo '<meta http-equiv="refresh" content="0; url="/>';
             
         }
         elseif ($validar == 1){
-            $_SESSION['username'] = $username;
-            $_SESSION['password'] = $password;
             
+            $informacion = $login->loadUsuario($username);
+           
+            $_SESSION['usu_id'] = $informacion[0]['pk_usu_id'];
+            $_SESSION['usu_username'] = $informacion[0]['usu_username'];
+            $_SESSION['name'] = $informacion[0]['usu_primer_nombre'];
+            $_SESSION['lastname'] = $informacion[0]['usu_primer_apellido'];
+            
+
           echo '<meta http-equiv="refresh" content="0; url="/>';
         }
         
@@ -53,7 +59,7 @@ class loginController {
     public function unlog(){
           
        session_destroy();    
-       echo '<meta http-equiv="refresh" content="0; url="/>';
+        echo '<meta http-equiv="refresh" content="0; url="/>';
         
     }
 

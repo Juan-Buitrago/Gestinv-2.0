@@ -65,9 +65,9 @@ class tiempos {
 
     public function viajes($fecha, $placa, $despachador, $turno) {
 
-        $usuario = $_SESSION['username'];
+        $usuario = $_SESSION['usu_id'];
 
-        $sql = "INSERT INTO viajes VALUES('','$placa','$fecha','$turno','$despachador','1')";
+        $sql = "INSERT INTO viajes VALUES('','$placa','$fecha','$turno','$despachador','$usuario')";
         $query = $this->Conexion->eject($sql);
         $consult = "SELECT MAX(pk_via_id) as id FROM viajes";
         $consecutivo = $this->Conexion->eject($consult);

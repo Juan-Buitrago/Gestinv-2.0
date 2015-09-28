@@ -11,7 +11,7 @@ $(document).ready(function (e) {
             data: "&petition=" + action,
             beforeSend: function (xhr) {
                 $(".contenido").css('display', 'block');
-                $(".contenido").html("<i class='fa fa-spinner fa-pulse'></i><br><h3>Procesando...</h3>");
+                $(".contenido").html("<i class='fa-2x fa fa-spinner fa-pulse'></i><br><h3>Procesando...</h3>");
             },
             success: function (data) {  
                 setTimeout(function () {
@@ -41,7 +41,7 @@ function processForms() {
             url: "../../../controller/" + controller,
             data: data + "&petition=" + action,
             beforeSend: function (xhr) {
-                $(".contenido").html("<i class='fa fa-spinner fa-pulse'></i><br><h3>Procesando...</h3>");
+                $(".contenido").html("<i class='fa-2x fa fa-spinner fa-pulse'></i><br><h3>Procesando...</h3>");
             },
             success: function (data) {
                 setTimeout(function () {

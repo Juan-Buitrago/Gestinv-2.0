@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!@$_SESSION['username']){  
+if (!@$_SESSION['usu_username']){  
     
     include"view/forms/frmLogin.php";   
 }else{

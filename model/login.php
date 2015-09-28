@@ -30,5 +30,17 @@ class login {
             return $validacion;
         }
     }
+    
+    public function loadUsuario($usuario){
+        
+        $sql = "SELECT * FROM usuarios WHERE usu_username='$usuario'";
+        $query= $this->conexion->eject($sql);
+        while($row = $this->conexion->fetch_assoc($query)){
+            
+            $datos[]=$row;
+        }
+        return $datos;
+    }
+    
 
 }

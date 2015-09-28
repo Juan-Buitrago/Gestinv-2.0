@@ -54,9 +54,10 @@ class Remisiones extends conexion {
 
     public function SaveHeader($placa, $id_sak, $observacion) {
         
-            $usuario = $_SESSION['username'];
+            $usuario = $_SESSION['usu_id'];
+            
             //se reciben la informacion por medio del metodo y se crea el query
-            $insert = "INSERT INTO remisiones VALUES ('','$placa','" . date("Y-m-d") . "','$id_sak','$observacion','1')";
+            $insert = "INSERT INTO remisiones VALUES ('','$placa','" . date("Y-m-d") . "','$id_sak','$observacion','$usuario')";
             $this->Conexion->eject($insert); // Se inyectan los datos a la base de datos
             // se almacena en un array los datos almacenados y se retornan
             $consult = "SELECT MAX(pk_rem_id) AS id FROM remisiones";
@@ -91,7 +92,7 @@ class Remisiones extends conexion {
 
             $result[] = $row;
         }
-        return $result;
+        return @$result;
     }
 
     public function updateHeader($id, $placa, $id_sak, $observacion) {

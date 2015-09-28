@@ -22,7 +22,7 @@
                 </div>
                 <div class="float-right">
                     <ul>
-                        <li>Hola! <?php echo $_SESSION['username'] ?></li>
+                        <li>Hola! <?php echo $_SESSION['name']." ". $_SESSION['lastname'] ?></li>
                         <li><i class="fa fa-unlock-alt"></i> <a name="unlog" href="login.Controller.php">Cerrar Session</a></li>
                         <li><i class="fa fa-info"></i> <a href="">Ayuda</a></li>
                     </ul>
