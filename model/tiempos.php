@@ -22,8 +22,19 @@ class tiempos {
     }
 
     public function loadViaje($id) {
-
-        $sql = "SELECT * FROM viajes WHERE pk_via_id = $id";
+        
+         $sql ="SELECT 
+                viajes.`pk_via_id`,
+                viajes.`via_fecha`,
+                viajes.`fk_pla_id`,
+                viajes.`via_turno`,
+                empleados.`emp_primer_nombre`,
+                empleados.`emp_primer_apellido`
+                FROM viajes 
+                INNER JOIN empleados
+                ON viajes.`fk_emp_id` = empleados.`pk_emp_id` 
+                WHERE pk_via_id = $id";
+         
         $query = $this->Conexion->eject($sql);
         while ($row = $this->Conexion->fetch_assoc($query)) {
 
@@ -34,7 +45,22 @@ class tiempos {
 
     public function loadPedidos($id) {
 
-        $sql = "SELECT * FROM viajes_pedidos WHERE fk_via_id = $id";
+        $sql = "SELECT 
+                aprovicionadores.`apr_nombre`,
+                destinos.`des_nombre`,
+                viajes_pedidos.`via_ped_condicion`,
+                viajes_pedidos.`via_ped_hora_pedido`,
+                viajes_pedidos.`via_ped_hora_salida`,
+                viajes_pedidos.`via_ped_hora_llegada`,
+                TIMEDIFF (viajes_pedidos.`via_ped_hora_salida`,viajes_pedidos.`via_ped_hora_pedido`) AS tiempo_reaccion,
+                TIMEDIFF (viajes_pedidos.`via_ped_hora_llegada`,viajes_pedidos.`via_ped_hora_salida`) AS tiempo_descargue
+                FROM aprovicionadores
+                INNER JOIN viajes_pedidos
+                ON aprovicionadores.`pk_apr_id` = viajes_pedidos.`fk_apr_id`
+                INNER JOIN destinos
+                ON viajes_pedidos.`fk_des_id` = destinos.`pk_des_id`
+                WHERE fk_via_id = $id";
+        
         $query = $this->Conexion->eject($sql);
         while ($row = $this->Conexion->fetch_assoc($query)) {
 

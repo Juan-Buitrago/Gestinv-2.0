@@ -16,7 +16,7 @@ if ($process == 0) {
         <td><strong>Placa: </strong>' . $save['viaje']['fk_pla_id'] . '</td>
     </tr>
     <tr>
-        <td><strong>Despachador: </strong>' . $save['viaje']['fk_emp_id'] . '</td>
+        <td><strong>Despachador: </strong>' . $save['viaje']['emp_primer_nombre'] ." ". $save['viaje']['emp_primer_apellido'].'</td>
     </tr>
     <tr>
         <td><strong>Turno: </strong>' . $save['viaje']['via_turno'] . '</td>
@@ -93,7 +93,7 @@ if ($process == 0) {
         <td><strong>Placa: </strong>' . $viaje['viaje']['fk_pla_id'] . '</td>
     </tr>
     <tr>
-        <td><strong>Despachador: </strong>' . $viaje['viaje']['fk_emp_id'] . '</td>
+        <td><strong>Despachador: </strong>' . $viaje['viaje']['emp_primer_nombre'] ." ". $viaje['viaje']['emp_primer_apellido'].'</td>
     </tr>
     <tr>
         <td><strong>Turno: </strong>' . $viaje['viaje']['via_turno'] . '</td>
@@ -114,14 +114,14 @@ if ($process == 0) {
 
     foreach ($pedidos as $row):
         echo "<tr>";
-        echo "<td>" . $row['fk_apr_id'] . "</td>";
-        echo "<td>" . $row['fk_des_id'] . "</td>";
+        echo "<td>" . $row['apr_nombre'] . "</td>";
+        echo "<td>" . $row['des_nombre'] . "</td>";
         echo "<td>" . $row['via_ped_condicion'] . "</td>";
         echo "<td>" . $row['via_ped_hora_pedido'] . "</td>";
         echo "<td>" . $row['via_ped_hora_salida'] . "</td>";
         echo "<td>" . $row['via_ped_hora_llegada'] . "</td>";
-        echo "<td>Pendiente</td>";
-        echo "<td>Pendiente</td>";
+        echo "<td>" . $row['tiempo_reaccion'] . "</td>";
+        echo "<td>" . $row['tiempo_descargue'] . "</td>";
         echo "</tr>";
     endforeach;
 
@@ -189,6 +189,7 @@ $(function () {
         // Build the chart
         $('#grafica1').highcharts({
             chart: {
+                backgroundColor:'transparent',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
@@ -235,6 +236,7 @@ $(function () {
         $(function () {
                         $('#grafica2').highcharts({
                             chart: {
+                                backgroundColor:'transparent',
                                 type: 'bar'
                             },
                             title: {
@@ -285,6 +287,7 @@ $(function () {
         // Build the chart
         $('#grafica3').highcharts({
             chart: {
+                backgroundColor:'transparent',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
