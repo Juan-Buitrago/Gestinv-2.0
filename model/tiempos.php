@@ -115,10 +115,10 @@ class tiempos {
 
         switch ($grafica){
          case(1):
-          /*Consulta Destino*/ $consulta = $this->Conexion->eject("SELECT destinos.`des_nombre` AS 'Destino', count(viajes_pedidos.`fk_des_id`) AS 'Cantidad' FROM  destinos LEFT JOIN viajes_pedidos ON destinos.`pk_des_id` = viajes_pedidos.`fk_des_id` GROUP BY (destinos.`des_nombre`) ORDER BY `des_nombre`");
+          /*Consulta Destino*/ $consulta = $this->Conexion->eject("SELECT destinos.`des_nombre` AS 'Destino', COUNT(viajes_pedidos.`fk_des_id`) AS 'Cantidad' FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` LEFT JOIN destinos  ON viajes_pedidos.`fk_des_id` = destinos.`pk_des_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' GROUP BY (destinos.`des_nombre`) ORDER BY `des_nombre`");
              break;
          case(2):
-          /*Consulta Aprovicionadores*/ $consulta = $this->Conexion->eject("SELECT aprovicionadores.`apr_nombre` AS 'Aprovicionadores', COUNT(viajes_pedidos.`fk_des_id`) AS 'Cantidad' FROM  aprovicionadores LEFT JOIN viajes_pedidos ON aprovicionadores.`pk_apr_id` = viajes_pedidos.`fk_apr_id` GROUP BY (aprovicionadores.`apr_nombre`) ORDER BY `apr_nombre`");
+          /*Consulta Aprovicionadores*/ $consulta = $this->Conexion->eject("SELECT aprovicionadores.`apr_nombre` AS 'Aprovicionadores', COUNT(viajes_pedidos.`fk_des_id`) AS 'Cantidad' FROM  viajes INNER JOIN viajes_pedidos on viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` LEFT JOIN aprovicionadores ON aprovicionadores.`pk_apr_id` = viajes_pedidos.`fk_apr_id` WHERE viajes.`via_fecha` between '$inicio' and '$final' GROUP BY (aprovicionadores.`apr_nombre`) ORDER BY `apr_nombre`");
              break;     
         }          
            while($row = $this->Conexion->fetch_assoc($consulta)){
