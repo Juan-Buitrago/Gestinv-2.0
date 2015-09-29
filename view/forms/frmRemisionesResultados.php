@@ -69,7 +69,7 @@ if ($process == 0) {
                 <td><button onclick="processForms()">Añadir</button></td>
                 </form>
                 <td>
-                     <form name="impresion" action ="remisiones.controller.php" method ="POST"><input type = "hidden" name ="id" value="' . @$save['header']['header']['pk_rem_id'] . '"><button onclick="processForms()">Imprimir</button></form>
+                     <form action ="controller/remisiones.controller.php?petition=impresion" method ="POST"><input type = "hidden" name ="id" value="' . @$save['header']['header']['pk_rem_id'] . '"><button>Imprimir</button></form>
                 </td>    
             </tr>
         </table><hr/>
@@ -115,7 +115,7 @@ if ($process == 0) {
     <table>
         <tr>
             <td>
-                <form name="impresion" action ="remisiones.controller.php" method ="POST"><input type = "hidden" name ="id" value="' . @$header['header']['pk_rem_id'] . '"><button onclick="processForms()">Imprimir</button></form>
+                <form action ="controller/remisiones.controller.php?petition=impresion" method ="POST"><input type = "hidden" name ="id" value="' . @$header['header']['pk_rem_id'] . '"><button>Imprimir</button></form>
             </td>
         </tr>
     </table>';

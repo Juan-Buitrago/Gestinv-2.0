@@ -3,14 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-        <link href="view/css/impresion.css" rel="stylesheet" type="text/css" />
-        <link rel="shortcut icon" href="view/img/favicon.ico">
+        <link href="../view/css/impresion.css" rel="stylesheet" type="text/css" />
+        <link rel="shortcut icon" href="../view/img/favicon.ico">
         <title>Impresion</title>
     </head>
     <body>
         <p> Carrera 32 N°.103 A - 19 La Enea - PBX (6) 8747979 - Manizales - Caldas </p>
         <div id ="cabecera">
-            <img src="view/img/logo.png" width="320px" height="150px" align="left"> </img> <br>&nbsp <br>&nbsp     
+            <img src="../view/img/logo.png" width="320px" height="150px" align="left"> </img> <br>&nbsp <br>&nbsp     
         </div>
 
         <section id="datosTransporte">
@@ -23,16 +23,16 @@
                     </tr>
                     <tr>
                         <td><strong>ORDEN DE DESPACHO: </strong></td>
-                        <td><?php echo $printHeader["header"]["pk_id"]; ?></td> 
+                        <td><?php echo $printHeader["header"]["pk_rem_id"]; ?></td> 
                     </tr>
                     <tr>
-                        <td><strong>FECHA: </strong><?php echo $printHeader["header"]["fecha"]; ?></td>
+                        <td><strong>FECHA: </strong><?php echo $printHeader["header"]["rem_fecha"]; ?></td>
                     </tr>
                     <tr>
-                        <td><strong>PLACA: </strong><?php echo $printHeader["header"]["placa"]; ?></td>
+                        <td><strong>PLACA: </strong><?php echo $printHeader["header"]["fk_pla_id"]; ?></td>
                     </tr>
                     <tr>
-                        <td><strong>ID SAK: </strong><?php echo $printHeader["header"]["id_sak"]; ?></td>
+                        <td><strong>ID SAK: </strong><?php echo $printHeader["header"]["rem_id_sak"]; ?></td>
                     </tr>
                 </table>
             </article>     
@@ -47,7 +47,7 @@
                         </tr>
                         <?php
                         foreach ($printArticle as $rows):
-                            echo "<tr><td>" . @$rows['codigo'] . "</td></tr>";
+                            echo "<tr><td>" . @$rows['rem_art_codigo'] . "</td></tr>";
                         endforeach;
                         ?>
                     </table>
@@ -60,7 +60,7 @@
                         </tr> 
                         <?php
                         foreach ($printArticle as $rows):
-                            echo "<tr><td>" . @$rows['descripcion'] . "</td></tr>";
+                            echo "<tr><td>" . @$rows['rem_art_descripcion'] . "</td></tr>";
                         endforeach;
                         ?>      
                     </table>  
@@ -71,8 +71,8 @@
                             <th>CANTIDAD</th>
                             <?php
                             foreach ($printArticle as $rows):
-                                @$sumatoria = ($sumatoria + $rows['cantidad']);
-                                echo "<tr><td>" . @$rows['cantidad'] . "</td></tr>";
+                                @$sumatoria = ($sumatoria + $rows['rem_art_cantidad']);
+                                echo "<tr><td>" . @$rows['rem_art_cantidad'] . "</td></tr>";
                             endforeach;
                             ?>      
                         </tr>                                    
@@ -97,7 +97,7 @@
                 <div id ="observacion">
                     <table style="width: 673px">
                         <tr><th>OBSERVACION</th></tr>                       
-                        <tr><td height="107" colspan="6"><?php echo $printHeader["header"]["observacion"]; ?></td></tr>
+                        <tr><td height="107" colspan="6"><?php echo $printHeader["header"]["rem_observacion"]; ?></td></tr>
                     </table>
                 </div>
 
