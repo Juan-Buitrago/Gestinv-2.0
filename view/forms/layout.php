@@ -61,12 +61,12 @@
                         </li>
                         <li><a href="#"><span><i class="fa fa-male"></i> Aprovicionadores</span></a>
                             <ul>
-                                <li><a href="#"><span><i class="fa fa-plus-circle"></i> Registrar</span></a></li>
+                                <li><a name="frmCrear" href="aprovicionadores.Controller.php"><span><i class="fa fa-plus-circle"></i> Registrar</span></a></li>
                             </ul>
                         </li>
                         <li><a href="#"><span><i class="fa fa-map-marker"></i> Destinos</span></a>
                             <ul>
-                                <li><a href="#"><span><i class="fa fa-plus-circle"></i> Registrar</span></a></li>
+                                <li><a name="frmCrear" href="destinos.Controller.php"><span><i class="fa fa-plus-circle"></i> Registrar</span></a></li>
                             </ul>
                         </li>
                         <li><a href="#"><span><i class="fa fa-user"></i> Usuarios</span></a>

@@ -189,7 +189,6 @@ $(function () {
         // Build the chart
         $('#grafica1').highcharts({
             chart: {
-                backgroundColor:'transparent',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
@@ -236,7 +235,6 @@ $(function () {
         $(function () {
                         $('#grafica2').highcharts({
                             chart: {
-                                backgroundColor:'transparent',
                                 type: 'bar'
                             },
                             title: {
@@ -287,7 +285,6 @@ $(function () {
         // Build the chart
         $('#grafica3').highcharts({
             chart: {
-                backgroundColor:'transparent',
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
