@@ -4,14 +4,14 @@
         <title>Gestinv 2.0</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../../view/css/style.css">
-        <link rel="stylesheet" type="text/css" href="../../view/css/menu.css">
-        <link rel="stylesheet" href="../../view/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="view/css/style.css">
+        <link rel="stylesheet" type="text/css" href="view/css/menu.css">
+        <link rel="stylesheet" href="view/css/font-awesome.min.css">
         <link rel="shortcut icon" href="../../view/img/favicon.ico">
-        <script type="application/javascript" language="javascript" src="../../view/js/jquery.js"></script>
-        <script type="application/javascript" language="javascript" src="../../view/js/ajax.js"></script>
-        <script src="../../lib/graficas/js/highcharts.js"></script>
-        <script src="../../lib/graficas/js/modules/exporting.js"></script>
+        <script type="application/javascript" language="javascript" src="view/js/jquery.js"></script>
+        <script type="application/javascript" language="javascript" src="view/js/ajax.js"></script>
+        <script src="lib/graficas/js/highcharts.js"></script>
+        <script src="lib/graficas/js/modules/exporting.js"></script>
     </head>  
     <body>
         <header>

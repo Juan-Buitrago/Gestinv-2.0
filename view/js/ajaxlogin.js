@@ -11,7 +11,7 @@ $(document).ready(function (e) {
 function ajax(controller, action, data) {
     $.ajax({
         type: "POST",
-        url: "../../../controller/"+controller,
+        url: "controller/"+controller,
         data: data + "&petition=" + action,
         beforeSend: function (xhr) {
             $(".contenido").html("<i class='fa-2x fa fa-spinner fa-pulse'></i><br><h3>Procesando...</h3>");

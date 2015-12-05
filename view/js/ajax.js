@@ -7,7 +7,7 @@ $(document).ready(function (e) {
         $(".contenido").empty();
         $.ajax({
             type: "POST",
-            url: "../../../controller/" + controller,
+            url: "controller/" + controller,
             data: "&petition=" + action,
             beforeSend: function (xhr) {
                 $(".contenido").css('display', 'block');
@@ -38,7 +38,7 @@ function processForms() {
         $(".contenido").empty();
         $.ajax({
             type: "POST",
-            url: "../../../controller/" + controller,
+            url: "controller/" + controller,
             data: data + "&petition=" + action,
             beforeSend: function (xhr) {
                 $(".contenido").html("<i class='fa-2x fa fa-spinner fa-pulse'></i><br><h3>Procesando...</h3>");

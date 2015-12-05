@@ -44,4 +44,13 @@ switch ($proceso) {
     case("consulta"):
         $consulta = $tiempos->excel($_REQUEST['inicio'], $_REQUEST['fin']);
         break;
+    
+   case("graficas"):
+        $process = 2;
+        $destinos = $tiempos->graficas(1,$_REQUEST['inicio'], $_REQUEST['fin']);
+        $aprovicionadores = $tiempos->graficas(2,$_REQUEST['inicio'], $_REQUEST['fin']);
+        $totalPedidos[] = $tiempos->graficas(3,$_REQUEST['inicio'],$_REQUEST['fin']);
+        $totalPedidos[] = $tiempos->graficas(4, $_REQUEST['inicio'], $_REQUEST['fin']); 
+        include '../view/forms/frmTiemposResultados.php';
+        break;
 }

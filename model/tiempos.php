@@ -119,7 +119,13 @@ class tiempos {
              break;
          case(2):
           /*Consulta Aprovicionadores*/ $consulta = $this->Conexion->eject("SELECT aprovicionadores.`apr_nombre` AS 'Aprovicionadores', COUNT(viajes_pedidos.`fk_des_id`) AS 'Cantidad' FROM  viajes INNER JOIN viajes_pedidos on viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` LEFT JOIN aprovicionadores ON aprovicionadores.`pk_apr_id` = viajes_pedidos.`fk_apr_id` WHERE viajes.`via_fecha` between '$inicio' and '$final' GROUP BY (aprovicionadores.`apr_nombre`) ORDER BY `apr_nombre`");
-             break;     
+             break;
+         case(3):
+          /*Consulta Cant Pedidos Normal*/ $consulta = $this->Conexion->eject("SELECT COUNT(viajes_pedidos.`via_ped_condicion`) normal FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_condicion` = 'Normal'");   
+             break;
+         case(4):
+          /*Consulta Cant Pedidos Normal*/ $consulta = $this->Conexion->eject("SELECT COUNT(viajes_pedidos.`via_ped_condicion`) critico FROM viajes_pedidos INNER JOIN viajes ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final' AND viajes_pedidos.`via_ped_condicion` = 'Critico'");   
+             break;
         }          
            while($row = $this->Conexion->fetch_assoc($consulta)){
             

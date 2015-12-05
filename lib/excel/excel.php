@@ -9,32 +9,33 @@ if (mysqli_connect_errno()) {
     exit();
 }
 $consulta = "
-	SELECT 
-        viajes.`pk_via_id` AS 'viaje',
-        viajes.`fk_pla_id`,
-        viajes.`via_fecha`,
-        viajes.`via_turno`,
-        viajes.`fk_emp_id`,
-
-        viajes_pedidos.`pk_via_ped_id`,
-        viajes_pedidos.`via_ped_doc_mercurio`,
-        viajes_pedidos.`via_ped_condicion`,
-        viajes_pedidos.`fk_apr_id`,
-        viajes_pedidos.`fk_des_id`,
-
-        viajes_pedidos.`via_ped_hora_pedido`,
-        viajes_pedidos.`via_ped_hora_salida`,
-        viajes_pedidos.`via_ped_hora_llegada`,
-
-        TIMEDIFF (viajes_pedidos.`via_ped_hora_salida`,viajes_pedidos.`via_ped_hora_pedido`) AS tiempo_reaccion,
-        TIMEDIFF (viajes_pedidos.`via_ped_hora_llegada`,viajes_pedidos.`via_ped_hora_salida`) AS tiempo_descargue,
-
-        viajes_pedidos.`via_ped_observacion`
-
-        FROM viajes INNER JOIN viajes_pedidos 
-        ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id` 
-
-        WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final'";
+SELECT 
+viajes.`pk_via_id` AS 'viaje',
+viajes.`fk_pla_id`,
+viajes.`via_fecha`,
+viajes.`via_turno`,
+empleados.`emp_primer_nombre`,
+empleados.`emp_primer_apellido`,
+viajes_pedidos.`pk_via_ped_id`,
+viajes_pedidos.`via_ped_doc_mercurio`,
+viajes_pedidos.`via_ped_condicion`,
+aprovicionadores.`apr_nombre`,
+destinos.`des_nombre`,
+viajes_pedidos.`via_ped_hora_pedido`,
+viajes_pedidos.`via_ped_hora_salida`,
+viajes_pedidos.`via_ped_hora_llegada`,
+TIMEDIFF (viajes_pedidos.`via_ped_hora_salida`,viajes_pedidos.`via_ped_hora_pedido`) AS tiempo_reaccion,
+TIMEDIFF (viajes_pedidos.`via_ped_hora_llegada`,viajes_pedidos.`via_ped_hora_salida`) AS tiempo_descargue,
+viajes_pedidos.`via_ped_observacion`
+FROM viajes INNER JOIN empleados
+ON viajes.`fk_emp_id` = empleados.`pk_emp_id`
+INNER JOIN viajes_pedidos 
+ON viajes.`pk_via_id` = viajes_pedidos.`fk_via_id`
+INNER JOIN aprovicionadores 
+ON viajes_pedidos.`fk_apr_id` = aprovicionadores.`pk_apr_id` 
+INNER JOIN destinos
+ON viajes_pedidos.`fk_des_id` = destinos.`pk_des_id`
+WHERE viajes.`via_fecha` BETWEEN '$inicio' AND '$final'";
 
 
 
@@ -95,12 +96,12 @@ if ($resultado->num_rows > 0) {
                 ->setCellValue('B' . $i, $fila['fk_pla_id'])
                 ->setCellValue('C' . $i, $fila['via_fecha'])
                 ->setCellValue('D' . $i, $fila['via_turno'])
-                ->setCellValue('E' . $i, $fila['fk_emp_id'])
+                ->setCellValue('E' . $i, $fila['emp_primer_nombre'] ." ". $fila['emp_primer_apellido'])
                 ->setCellValue('F' . $i, $fila['pk_via_ped_id'])
                 ->setCellValue('G' . $i, $fila['via_ped_doc_mercurio'])
                 ->setCellValue('H' . $i, $fila['via_ped_condicion'])
-                ->setCellValue('I' . $i, $fila['fk_apr_id'])
-                ->setCellValue('J' . $i, $fila['fk_des_id'])
+                ->setCellValue('I' . $i, $fila['apr_nombre'])
+                ->setCellValue('J' . $i, $fila['des_nombre'])
                 ->setCellValue('K' . $i, $fila['via_ped_hora_pedido'])
                 ->setCellValue('L' . $i, $fila['via_ped_hora_salida'])
                 ->setCellValue('M' . $i, $fila['via_ped_hora_llegada'])

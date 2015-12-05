@@ -1,5 +1,5 @@
 <h1>Informe completo de pedidos</h1><hr/>
-<form action ="../../lib/excel/excel.php" method="POST">
+<form action ="lib/excel/excel.php" method="POST">
     <table style="text-align:left">
         <tr>
             <td><strong>Fecha Inicio:</strong><input type ="date" name ="inicio" required/></td>

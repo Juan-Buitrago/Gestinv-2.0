@@ -16,7 +16,7 @@ if ($process == 0) {
         <td><strong>Placa: </strong>' . $save['viaje']['fk_pla_id'] . '</td>
     </tr>
     <tr>
-        <td><strong>Despachador: </strong>' . $save['viaje']['emp_primer_nombre'] ." ". $save['viaje']['emp_primer_apellido'].'</td>
+        <td><strong>Despachador: </strong>' . $save['viaje']['emp_primer_nombre'] . " " . $save['viaje']['emp_primer_apellido'] . '</td>
     </tr>
     <tr>
         <td><strong>Turno: </strong>' . $save['viaje']['via_turno'] . '</td>
@@ -93,7 +93,7 @@ if ($process == 0) {
         <td><strong>Placa: </strong>' . $viaje['viaje']['fk_pla_id'] . '</td>
     </tr>
     <tr>
-        <td><strong>Despachador: </strong>' . $viaje['viaje']['emp_primer_nombre'] ." ". $viaje['viaje']['emp_primer_apellido'].'</td>
+        <td><strong>Despachador: </strong>' . $viaje['viaje']['emp_primer_nombre'] . " " . $viaje['viaje']['emp_primer_apellido'] . '</td>
     </tr>
     <tr>
         <td><strong>Turno: </strong>' . $viaje['viaje']['via_turno'] . '</td>
@@ -215,13 +215,13 @@ $(function () {
                 colorByPoint: true,
                 data: [";
 
-                    foreach ($destinos as $row):
-                        echo "{";
-                        echo "name: '" . $row['Destino'] . "',";
-                        echo "y:" . $row['Cantidad'] . "";
-                        echo "},";
-                    endforeach;
-                    echo"]
+    foreach ($destinos as $row):
+        echo "{";
+        echo "name: '" . $row['Destino'] . "',";
+        echo "y:" . $row['Cantidad'] . "";
+        echo "},";
+    endforeach;
+    echo"]
             }]
         });
     });
@@ -242,12 +242,12 @@ $(function () {
                             },
                             xAxis: {
                                 categories: [";
-                                    foreach ($destinos as $row):
-                                        echo "'";
-                                        echo $row['Destino'];
-                                        echo "',";
-                                    endforeach;
-                                    echo "      ]
+    foreach ($destinos as $row):
+        echo "'";
+        echo $row['Destino'];
+        echo "',";
+    endforeach;
+    echo "      ]
                             },
                             yAxis: {
                                 min: 0,
@@ -266,11 +266,11 @@ $(function () {
                             series: [{
                                       name:'Pedidos',
                                       data:[";
-                                foreach ($destinos as $row):
-                                    echo $row['Cantidad'];
-                                    echo ",";
-                                endforeach;
-                                echo "]}]
+    foreach ($destinos as $row):
+        echo $row['Cantidad'];
+        echo ",";
+    endforeach;
+    echo "]}]
                         });
                     });
 		       </script>
@@ -310,19 +310,74 @@ $(function () {
                 name: 'Brands',
                 colorByPoint: true,
                 data: [";
-
-                foreach ($aprovicionadores as $row):
-                    echo "{";
-                    echo "name: '" . $row['Aprovicionadores'] . "',";
-                    echo "y:" . $row['Cantidad'] . "";
-                    echo "},";
-                endforeach;
-                echo"]
+    foreach ($aprovicionadores as $row):
+        echo "{";
+        echo "name: '" . $row['Aprovicionadores'] . "',";
+        echo "y:" . $row['Cantidad'] . "";
+        echo "},";
+    endforeach;
+    echo"]
             }]
         });
     });
 });
 		</script>
                 <div id='grafica3'></div><hr/>";
+    echo "
+   <script type='text/javascript'>
+$(function () {
+
+    $(document).ready(function () {
+
+        // Build the chart
+        $('#grafica4').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Pedidos por Condicion'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [";
+    $contador = 0;
+    foreach ($totalPedidos as $fila) {
+        foreach ($fila as $row) {
+            echo "{";
+            if ($contador == 0) {
+                echo "name:'Normal',";
+                echo "y:" . $row['normal'] . "";
+            } else {
+                echo "name:'Critico',";
+                echo "y:" . $row['critico'] . "";
+            }
+            echo "},";
+            $contador++;
+        }
+    }
+    echo"]
+            }]
+        });
+    });
+});
+</script>
+<div id='grafica4'></div>";
 }
 ?>
